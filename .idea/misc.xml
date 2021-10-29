@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/nonii/AndroidStudioProjects/VideoOnlineCinema/app/src/main/res/drawable/ic_image_not_found.xml" value="0.1" />
+        <entry key="..\:/Users/nonii/AndroidStudioProjects/VideoOnlineCinema/app/src/main/res/drawable/ic_placeholder.xml" value="0.1" />
         <entry key="..\:/Users/nonii/AndroidStudioProjects/VideoOnlineCinema/app/src/main/res/layout/fragment_movies_card.xml" value="0.14628623188405798" />
         <entry key="..\:/Users/nonii/AndroidStudioProjects/VideoOnlineCinema/app/src/main/res/layout/fragment_movies_list.xml" value="0.14492753623188406" />
         <entry key="..\:/Users/nonii/AndroidStudioProjects/VideoOnlineCinema/app/src/main/res/layout/movie_item.xml" value="0.14628623188405798" />
