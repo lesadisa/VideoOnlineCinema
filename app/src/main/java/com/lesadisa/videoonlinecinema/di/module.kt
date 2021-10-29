@@ -5,8 +5,8 @@ import com.lesadisa.videoonlinecinema.data.api.CinemaApi
 import com.lesadisa.videoonlinecinema.data.api.CinemaRemoteSource
 import com.lesadisa.videoonlinecinema.data.api.CinemaRepository
 import com.lesadisa.videoonlinecinema.data.api.CinemaRepositoryImpl
-import com.lesadisa.videoonlinecinema.domain.MainScreenCinemaInteractor
-import com.lesadisa.videoonlinecinema.ui.MainScreenViewModel
+import com.lesadisa.videoonlinecinema.domain.CinemaInteractor
+import com.lesadisa.videoonlinecinema.ui.CinemaViewModel
 import okhttp3.OkHttpClient
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -43,12 +43,12 @@ val appModule = module {
         CinemaRepositoryImpl(get<CinemaRemoteSource>())
     }
 
-    single<MainScreenCinemaInteractor> {
-        MainScreenCinemaInteractor(get<CinemaRepository>())
+    single<CinemaInteractor> {
+        CinemaInteractor(get<CinemaRepository>())
     }
 
-    single<MainScreenViewModel> {
-        MainScreenViewModel(get<MainScreenCinemaInteractor>())
+    single<CinemaViewModel> {
+        CinemaViewModel(get<CinemaInteractor>())
     }
 }
 
