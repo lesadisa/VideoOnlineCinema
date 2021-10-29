@@ -5,7 +5,7 @@ data class CinemaDomainModel(
     val adult: Boolean,
 
     //Жанр, может быть несколько
-    val genres: CinemaSourseDomainModel,
+    val genres: List<CinemaGenreDomainModel>,
 
     val id: Int,
 
