@@ -1,9 +1,12 @@
-package com.lesadisa.videoonlinecinema.ui.adapter
+package com.lesadisa.videoonlinecinema.features.films_screen.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.lesadisa.videoonlinecinema.base.loadImage
+import com.lesadisa.videoonlinecinema.base.setThrottledClickListener
+import com.lesadisa.videoonlinecinema.databinding.MovieItemBinding
 import com.lesadisa.videoonlinecinema.domain.model.CinemaDomainModel
 
 class CinemaAdapter(
@@ -13,7 +16,7 @@ class CinemaAdapter(
     RecyclerView.Adapter<CinemaAdapter.MoviesViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder {
-        val binding = CinemaAdapter.inflate(
+        val binding = MovieItemBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
@@ -29,7 +32,7 @@ class CinemaAdapter(
 
     override fun getItemCount(): Int = movies.size
 
-    inner class MoviesViewHolder(private val binding: CinemaAdapter) :
+    inner class MoviesViewHolder(private val binding: MovieItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: CinemaDomainModel) {
             binding.moviePoster.apply {
@@ -41,8 +44,8 @@ class CinemaAdapter(
         }
     }
 
-    fun updateList(newMovies: List<Movie>) {
-        val diffCallback = MoviesDiff(
+    fun updateList(newMovies: List<CinemaDomainModel>) {
+        val diffCallback = com.lesadisa.videoonlinecinema.features.films_screen.ui.adapter.DiffUtil(
             oldMoviesList = movies,
             newMoviesList = newMovies
         )

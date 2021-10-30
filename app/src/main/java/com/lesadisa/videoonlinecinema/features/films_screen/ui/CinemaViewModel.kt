@@ -1,4 +1,4 @@
-package com.lesadisa.videoonlinecinema.ui
+package com.lesadisa.videoonlinecinema.features.films_screen.ui
 
 import com.lesadisa.videoonlinecinema.base.BaseViewModel
 import com.lesadisa.videoonlinecinema.base.Event

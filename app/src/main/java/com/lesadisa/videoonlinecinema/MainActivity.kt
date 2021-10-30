@@ -3,7 +3,7 @@ package com.lesadisa.videoonlinecinema
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.lesadisa.videoonlinecinema.ui.CinemaListFragment
+import com.lesadisa.videoonlinecinema.features.films_screen.ui.CinemaListFragment
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
