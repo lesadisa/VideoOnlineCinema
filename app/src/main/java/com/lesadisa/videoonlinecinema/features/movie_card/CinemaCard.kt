@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.lesadisa.videoonlinecinema.base.loadImage
@@ -42,7 +43,13 @@ class CinemaCard : Fragment() {
         binding.apply {
             cardPoster.loadImage(currMovie.posterPath)
             cardMovieTitle.text = currMovie.originalTitle
+            ibtToPlay.setOnClickListener {
+                val toast = Toast.makeText(context, "Нажата кнопка 1", Toast.LENGTH_LONG)
+                toast.show()
+            }
+
         }
+
     }
 
     override fun onDestroy() {
