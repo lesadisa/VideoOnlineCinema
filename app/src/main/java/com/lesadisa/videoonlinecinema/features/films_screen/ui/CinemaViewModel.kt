@@ -9,6 +9,7 @@ class CinemaViewModel(private val cinemaInteractor: CinemaInteractor) :
     BaseViewModel<ViewState>() {
     val singleLiveEvent = SingleLiveEvent<SingleEvent>()
 
+
     init {
         processUiEvent(UiEvent.FetchMovies)
     }
@@ -41,6 +42,7 @@ class CinemaViewModel(private val cinemaInteractor: CinemaInteractor) :
             is UiEvent.OnPosterClick -> {
                 singleLiveEvent.value = SingleEvent.OpenMovieCard(event.cinema)
             }
+
             is DataEvent.OnFetching -> {
                 return previousState.copy(isLoading = !previousState.isLoading)
             }

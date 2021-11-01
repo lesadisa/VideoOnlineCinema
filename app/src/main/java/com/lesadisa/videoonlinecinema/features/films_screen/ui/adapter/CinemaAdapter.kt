@@ -45,7 +45,7 @@ class CinemaAdapter(
     }
 
     fun updateList(newMovies: List<CinemaDomainModel>) {
-        val diffCallback = com.lesadisa.videoonlinecinema.features.films_screen.ui.adapter.DiffUtil(
+        val diffCallback = DiffUtil(
             oldMoviesList = movies,
             newMoviesList = newMovies
         )

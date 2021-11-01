@@ -15,7 +15,10 @@ data class ViewState(
 sealed class UiEvent : Event {
     object FetchMovies : UiEvent()
     data class OnPosterClick(val cinema: CinemaDomainModel) : UiEvent()
+
+
 }
+
 
 sealed class DataEvent : Event {
     object OnFetching : DataEvent()

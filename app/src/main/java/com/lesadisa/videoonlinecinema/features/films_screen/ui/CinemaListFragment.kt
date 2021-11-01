@@ -48,6 +48,7 @@ class CinemaListFragment : Fragment() {
 
         moviesViewModel.viewState.observe(viewLifecycleOwner, ::render)
         moviesViewModel.singleLiveEvent.observe(viewLifecycleOwner, ::onSingleEvent)
+
     }
 
     override fun onDestroyView() {
@@ -70,4 +71,6 @@ class CinemaListFragment : Fragment() {
             }
         }
     }
+
+
 }
