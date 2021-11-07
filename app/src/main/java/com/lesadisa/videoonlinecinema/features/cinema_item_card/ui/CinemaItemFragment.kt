@@ -8,11 +8,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import com.lesadisa.videoonlinecinema.R
 import com.lesadisa.videoonlinecinema.base.loadImage
 import com.lesadisa.videoonlinecinema.databinding.FragmentCinemaCardBinding
 import com.lesadisa.videoonlinecinema.domain.model.CinemaDomainModel
 
-class CinemaItemFragment : Fragment() {
+class CinemaItemFragment : Fragment(R.layout.fragment_cinema_card) {
     companion object {
         private const val MOVIE_KEY = "movie"
         fun newInstance(movie: CinemaDomainModel) = CinemaItemFragment().apply {
@@ -20,8 +21,11 @@ class CinemaItemFragment : Fragment() {
         }
     }
 
+    private val viewModel: CinemaItemViewModel by viewModel()
+
     private var _binding: FragmentCinemaCardBinding? = null
     private val binding get() = _binding!!
+
 
     private val currMovie: CinemaDomainModel by lazy {
         requireArguments().getParcelable(MOVIE_KEY)!!

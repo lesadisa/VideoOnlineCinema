@@ -3,7 +3,6 @@ package com.lesadisa.videoonlinecinema.features.cinema_catalog_screen.ui
 import com.lesadisa.videoonlinecinema.base.Event
 import com.lesadisa.videoonlinecinema.domain.model.CinemaDomainModel
 
-//поросить рассказать
 data class ViewState(
     val cinema: List<CinemaDomainModel>,
     val errorMessage: String?,
@@ -19,7 +18,6 @@ sealed class UiEvent : Event {
 
 }
 
-
 sealed class DataEvent : Event {
     object OnFetching : DataEvent()
     data class SuccessMoviesRequest(val cinema: List<CinemaDomainModel>) : DataEvent()
@@ -30,7 +28,3 @@ sealed class SingleEvent : Event {
     data class OpenMovieCard(val cinema: CinemaDomainModel) : SingleEvent()
 }
 
-// добавил для теста
-sealed class PlayEvent : Event {
-    data class OpenPlayCard(val cinema: CinemaDomainModel) : PlayEvent()
-}
