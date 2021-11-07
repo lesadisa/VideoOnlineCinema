@@ -1,4 +1,4 @@
-package com.lesadisa.videoonlinecinema.features.films_screen.ui
+package com.lesadisa.videoonlinecinema.features.cinema_catalog_screen.ui
 
 import com.lesadisa.videoonlinecinema.base.Event
 import com.lesadisa.videoonlinecinema.domain.model.CinemaDomainModel
@@ -28,4 +28,9 @@ sealed class DataEvent : Event {
 
 sealed class SingleEvent : Event {
     data class OpenMovieCard(val cinema: CinemaDomainModel) : SingleEvent()
+}
+
+// добавил для теста
+sealed class PlayEvent : Event {
+    data class OpenPlayCard(val cinema: CinemaDomainModel) : PlayEvent()
 }

@@ -1,4 +1,4 @@
-package com.lesadisa.videoonlinecinema.features.films_screen.ui.adapter
+package com.lesadisa.videoonlinecinema.features.cinema_catalog_screen.ui.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 import com.lesadisa.videoonlinecinema.domain.model.CinemaDomainModel

@@ -1,4 +1,4 @@
-package com.lesadisa.videoonlinecinema.features.films_screen.ui
+package com.lesadisa.videoonlinecinema.features.cinema_catalog_screen.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,18 +9,18 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.lesadisa.videoonlinecinema.R
-import com.lesadisa.videoonlinecinema.databinding.FragmentMoviesListBinding
-import com.lesadisa.videoonlinecinema.features.films_screen.ui.adapter.CinemaAdapter
-import com.lesadisa.videoonlinecinema.features.movie_card.CinemaCard
+import com.lesadisa.videoonlinecinema.databinding.FragmentCinemaCatalogBinding
+import com.lesadisa.videoonlinecinema.features.cinema_catalog_screen.ui.adapter.CinemaCatalogAdapter
+import com.lesadisa.videoonlinecinema.features.cinema_item_card.ui.CinemaItemFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class CinemaListFragment : Fragment() {
-    private var _binding: FragmentMoviesListBinding? = null
+class CinemaCatalogFragment : Fragment() {
+    private var _binding: FragmentCinemaCatalogBinding? = null
     private val binding get() = _binding!!
 
-    private val moviesViewModel by viewModel<CinemaViewModel>()
-    private val moviesAdapter: CinemaAdapter by lazy {
-        CinemaAdapter(movies = emptyList()) { movie ->
+    private val moviesViewModel by viewModel<CinemaCatalogViewModel>()
+    private val moviesCatalogAdapter: CinemaCatalogAdapter by lazy {
+        CinemaCatalogAdapter(movies = emptyList()) { movie ->
             moviesViewModel.processUiEvent(UiEvent.OnPosterClick(movie))
         }
     }
@@ -30,7 +30,7 @@ class CinemaListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentMoviesListBinding
+        _binding = FragmentCinemaCatalogBinding
             .inflate(inflater, container, false)
         return binding.root
     }
@@ -43,7 +43,7 @@ class CinemaListFragment : Fragment() {
                 RecyclerView.HORIZONTAL,
                 false
             )
-            adapter = moviesAdapter
+            adapter = moviesCatalogAdapter
         }
 
         moviesViewModel.viewState.observe(viewLifecycleOwner, ::render)
@@ -58,14 +58,14 @@ class CinemaListFragment : Fragment() {
 
     private fun render(viewState: ViewState) {
         binding.pbMovies.isGone = !viewState.isLoading
-        moviesAdapter.updateList(viewState.cinema)
+        moviesCatalogAdapter.updateList(viewState.cinema)
     }
 
     private fun onSingleEvent(event: SingleEvent) {
         when (event) {
             is SingleEvent.OpenMovieCard -> {
                 parentFragmentManager.beginTransaction()
-                    .add(R.id.moviesContainer, CinemaCard.newInstance(event.cinema))
+                    .add(R.id.moviesContainer, CinemaItemFragment.newInstance(event.cinema))
                     .addToBackStack("movies")
                     .commit()
             }

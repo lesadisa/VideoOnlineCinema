@@ -9,7 +9,7 @@ import com.lesadisa.videoonlinecinema.data.api.CinemaRemoteSource
 import com.lesadisa.videoonlinecinema.data.api.CinemaRepository
 import com.lesadisa.videoonlinecinema.data.api.CinemaRepositoryImpl
 import com.lesadisa.videoonlinecinema.domain.CinemaInteractor
-import com.lesadisa.videoonlinecinema.features.films_screen.ui.CinemaViewModel
+import com.lesadisa.videoonlinecinema.features.cinema_catalog_screen.ui.CinemaCatalogViewModel
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
@@ -45,8 +45,8 @@ val appModule = module {
         CinemaInteractor(get<CinemaRepository>())
     }
 
-    single<CinemaViewModel> {
-        CinemaViewModel(get<CinemaInteractor>())
+    single<CinemaCatalogViewModel> {
+        CinemaCatalogViewModel(get<CinemaInteractor>())
     }
 }
 

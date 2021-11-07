@@ -1,11 +1,11 @@
-package com.lesadisa.videoonlinecinema.features.films_screen.ui
+package com.lesadisa.videoonlinecinema.features.cinema_catalog_screen.ui
 
 import com.lesadisa.videoonlinecinema.base.BaseViewModel
 import com.lesadisa.videoonlinecinema.base.Event
 import com.lesadisa.videoonlinecinema.base.SingleLiveEvent
 import com.lesadisa.videoonlinecinema.domain.CinemaInteractor
 
-class CinemaViewModel(private val cinemaInteractor: CinemaInteractor) :
+class CinemaCatalogViewModel(private val cinemaInteractor: CinemaInteractor) :
     BaseViewModel<ViewState>() {
     val singleLiveEvent = SingleLiveEvent<SingleEvent>()
 

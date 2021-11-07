@@ -37,5 +37,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/moviesToolbar"
-        tools:listitem="@layout/movie_item" />
+        tools:listitem="@layout/cinema_item_catalog" />
 </androidx.constraintlayout.widget.ConstraintLayout>
