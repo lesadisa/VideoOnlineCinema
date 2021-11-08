@@ -63,7 +63,7 @@ class CinemaCardFragment : Fragment() {
 
         }
 
-// что то здесь не так
+//  что то здесь не так
         //   cardViewModel.singleLiveEvents.observe(viewLifecycleOwner, ::onSingleEvent)
 
     }
