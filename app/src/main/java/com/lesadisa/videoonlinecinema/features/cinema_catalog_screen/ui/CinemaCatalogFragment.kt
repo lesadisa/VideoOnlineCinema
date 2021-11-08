@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.lesadisa.videoonlinecinema.R
 import com.lesadisa.videoonlinecinema.databinding.FragmentCinemaCatalogBinding
-import com.lesadisa.videoonlinecinema.features.cinema_catalog_screen.ui.adapter.CinemaCatalogAdapter
 import com.lesadisa.videoonlinecinema.features.cinema_card.ui.CinemaCardFragment
+import com.lesadisa.videoonlinecinema.features.cinema_catalog_screen.ui.adapter.CinemaCatalogAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CinemaCatalogFragment : Fragment() {

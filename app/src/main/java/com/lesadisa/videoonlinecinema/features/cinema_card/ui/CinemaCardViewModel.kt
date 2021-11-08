@@ -10,7 +10,7 @@ import com.lesadisa.videoonlinecinema.domain.CinemaInteractor
 class CinemaCardViewModel(
     private val cinemaInteractor: CinemaInteractor
 ) : BaseViewModel<ViewState>() {
-    val singleLiveEvent = SingleLiveEvent<SingleEvent>()
+    val singleLiveEvents = SingleLiveEvent<SingleEvent>()
 
     init {
         processUiEvent(UiEvent.FetchMovies)
@@ -42,12 +42,14 @@ class CinemaCardViewModel(
             //обрабатываем нажатие (получено из adaptera)
             is UiEvent.OnPlayClick -> {
                 // singleEvent  это эвент чтобы сделать навигацию для фрагмента
-                singleLiveEvent.value = SingleEvent.OpenPlayCard(event.cinema)
+                singleLiveEvents.value = SingleEvent.OpenPlayCard(event.cinema)
+
             }
 
             is DataEvent.OnFetching -> {
                 return previousState.copy(isLoading = !previousState.isLoading)
             }
+
             is DataEvent.SuccessMoviesRequest -> {
                 return previousState.copy(
                     cinema = event.cinema,

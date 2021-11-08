@@ -1,13 +1,7 @@
 package com.lesadisa.videoonlinecinema.features.cinema_play_screen.ui
 
-import android.net.Uri
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import com.lesadisa.videoonlinecinema.databinding.FragmentPlayerBinding
 import com.lesadisa.videoonlinecinema.domain.model.CinemaDomainModel
 
 class PlayFragment : Fragment() {
@@ -18,7 +12,7 @@ class PlayFragment : Fragment() {
         }
     }
 
-    private var _binding: FragmentPlayerBinding? = null
+  /*  private var _binding: FragmentPlayerBinding? = null
     private val binding get() = _binding!!
 
     private val currMovie: CinemaDomainModel by lazy {
@@ -42,7 +36,7 @@ class PlayFragment : Fragment() {
             videoPlayer.setVideoURI(Uri.parse(currMovie.video))
 
         }
-    }
+    }*/
 
 
 }
