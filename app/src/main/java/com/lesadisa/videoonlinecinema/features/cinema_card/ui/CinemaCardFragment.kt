@@ -52,7 +52,7 @@ class CinemaCardFragment : Fragment(R.layout.fragment_cinema_card) {
             cardPoster.loadImage(currMovie.posterPath)
             cardMovieTitle.text = currMovie.originalTitle
             
-            // отрабатываем вывод сообщения
+            // отрабатываем вывод сообщения 2
 
             ibtToPlay.setOnClickListener {
                 val toast = Toast.makeText(context, "Нажата кнопка 1", Toast.LENGTH_LONG)
