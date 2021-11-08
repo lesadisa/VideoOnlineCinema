@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.lesadisa.videoonlinecinema.R
 import com.lesadisa.videoonlinecinema.databinding.FragmentCinemaCatalogBinding
 import com.lesadisa.videoonlinecinema.features.cinema_catalog_screen.ui.adapter.CinemaCatalogAdapter
-import com.lesadisa.videoonlinecinema.features.cinema_item_card.ui.CinemaItemFragment
+import com.lesadisa.videoonlinecinema.features.cinema_card.ui.CinemaCardFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CinemaCatalogFragment : Fragment() {
@@ -19,9 +19,11 @@ class CinemaCatalogFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val moviesViewModel by viewModel<CinemaCatalogViewModel>()
+
+    //получаем сообщение от Adaptera о нажатии
     private val moviesCatalogAdapter: CinemaCatalogAdapter by lazy {
         CinemaCatalogAdapter(movies = emptyList()) { movie ->
-            moviesViewModel.processUiEvent(UiEvent.OnPosterClick(movie))
+            moviesViewModel.processUiEvent(UiEvent.OnPosterClick(movie)) //переходим на OnPosterClick в Contract
         }
     }
 
@@ -60,12 +62,13 @@ class CinemaCatalogFragment : Fragment() {
         binding.pbMovies.isGone = !viewState.isLoading
         moviesCatalogAdapter.updateList(viewState.cinema)
     }
-
+// обрабатываем пришедший SingleEvent
     private fun onSingleEvent(event: SingleEvent) {
         when (event) {
             is SingleEvent.OpenMovieCard -> {
+
                 parentFragmentManager.beginTransaction()
-                    .add(R.id.moviesContainer, CinemaItemFragment.newInstance(event.cinema))
+                    .add(R.id.moviesContainer, CinemaCardFragment.newInstance(event.cinema))
                     .addToBackStack("movies")
                     .commit()
             }

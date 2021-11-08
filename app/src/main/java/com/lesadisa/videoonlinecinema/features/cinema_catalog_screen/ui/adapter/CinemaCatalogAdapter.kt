@@ -11,7 +11,7 @@ import com.lesadisa.videoonlinecinema.domain.model.CinemaDomainModel
 
 class CinemaCatalogAdapter(
     private var movies: List<CinemaDomainModel>,
-    private val onItemClick: (movie: CinemaDomainModel) -> Unit,
+    private val onItemClick: (movie: CinemaDomainModel) -> Unit, // нажатие (полученное binding.moviePoster.) передается в синемадоменмодель
 ) :
     RecyclerView.Adapter<CinemaCatalogAdapter.MoviesViewHolder>() {
 
@@ -35,6 +35,8 @@ class CinemaCatalogAdapter(
     inner class MoviesViewHolder(private val binding: CinemaItemCatalogBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: CinemaDomainModel) {
+
+
             binding.moviePoster.apply {
                 loadImage(movie.posterPath)
                 setThrottledClickListener {

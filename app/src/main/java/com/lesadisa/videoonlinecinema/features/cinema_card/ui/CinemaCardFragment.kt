@@ -1,4 +1,4 @@
-package com.lesadisa.videoonlinecinema.features.cinema_item_card.ui
+package com.lesadisa.videoonlinecinema.features.cinema_card.ui
 
 
 import android.os.Bundle
@@ -12,23 +12,27 @@ import com.lesadisa.videoonlinecinema.R
 import com.lesadisa.videoonlinecinema.base.loadImage
 import com.lesadisa.videoonlinecinema.databinding.FragmentCinemaCardBinding
 import com.lesadisa.videoonlinecinema.domain.model.CinemaDomainModel
+import com.lesadisa.videoonlinecinema.features.cinema_catalog_screen.ui.SingleEvent
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class CinemaItemFragment : Fragment(R.layout.fragment_cinema_card) {
+class CinemaCardFragment : Fragment(R.layout.fragment_cinema_card) {
     companion object {
         private const val MOVIE_KEY = "movie"
-        fun newInstance(movie: CinemaDomainModel) = CinemaItemFragment().apply {
+        fun newInstance(movie: CinemaDomainModel) = CinemaCardFragment().apply {
             arguments = bundleOf(Pair(MOVIE_KEY, movie))
         }
     }
 
-    private val viewModel: CinemaItemViewModel by viewModel()
+    private val cardViewModel: CinemaCardViewModel by viewModel()
+
+
 
     private var _binding: FragmentCinemaCardBinding? = null
     private val binding get() = _binding!!
 
+        private val currMovie: CinemaDomainModel by lazy {
+            requireArguments().getParcelable(MOVIE_KEY)!!
 
-    private val currMovie: CinemaDomainModel by lazy {
-        requireArguments().getParcelable(MOVIE_KEY)!!
     }
 
     override fun onCreateView(
@@ -41,12 +45,15 @@ class CinemaItemFragment : Fragment(R.layout.fragment_cinema_card) {
         return binding.root
     }
 
-
+// вносим данные во View
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
             cardPoster.loadImage(currMovie.posterPath)
             cardMovieTitle.text = currMovie.originalTitle
+            
+            // отрабатываем вывод сообщения
+
             ibtToPlay.setOnClickListener {
                 val toast = Toast.makeText(context, "Нажата кнопка 1", Toast.LENGTH_LONG)
                 toast.show()
@@ -55,6 +62,20 @@ class CinemaItemFragment : Fragment(R.layout.fragment_cinema_card) {
         }
 
     }
+
+    // обрабатываем пришедший SingleEvent
+    private fun onSingleEvent(event: SingleEvent) {
+        when (event) {
+            is SingleEvent.OpenMovieCard -> {
+
+                parentFragmentManager.beginTransaction()
+                    .add(R.id.moviesContainer, CinemaCardFragment.newInstance(event.cinema))
+                    .addToBackStack("movies")
+                    .commit()
+            }
+        }
+    }
+
 
     override fun onDestroy() {
         super.onDestroy()
