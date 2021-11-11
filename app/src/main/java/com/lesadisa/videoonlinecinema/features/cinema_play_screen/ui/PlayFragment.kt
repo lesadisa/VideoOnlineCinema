@@ -1,6 +1,5 @@
 package com.lesadisa.videoonlinecinema.features.cinema_play_screen.ui
 
-
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -23,7 +22,6 @@ class PlayFragment : Fragment() {
     private val binding get() = _binding!!
     private var exoPlayer: ExoPlayer? = null
 
-
     companion object {
         private const val MOVIE_KEY = "movie"
         fun newInstance(movie: CinemaDomainModel) = PlayFragment().apply {
@@ -45,32 +43,20 @@ class PlayFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = FragmentPlayerBinding
             .inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding.apply {
-            playerView.setShutterBackgroundColor(Color.TRANSPARENT)
-            playerView.player = exoPlayer
-            playerView.requestFocus()
-
-        }
-
-    }
 
     private fun initializePlayer() {
-
         exoPlayer = ExoPlayer.Builder(requireContext()).build().apply {
-            prepare()
+            binding.playerView.player = this
+//            setMediaItem(MediaItem.fromUri(currMovie.video))
             setMediaSource(buildMediaSource())
             playWhenReady = true
+            prepare()
         }
-
-
     }
 
     private fun buildMediaSource(): MediaSource {
@@ -117,8 +103,3 @@ class PlayFragment : Fragment() {
         exoPlayer = null
     }
 }
-
-
-
-
-
