@@ -63,23 +63,6 @@ class CinemaCardFragment : Fragment() {
 
 
     }
-    //  что то здесь не так
-    //   cardViewModel.singleLiveEvents.observe(viewLifecycleOwner, ::onSingleEvent)
-
-    // обрабатываем пришедший SingleEvent
-
-    private fun onSingleEvent(event: SingleEvent) {
-
-        /* when (event) {
-             is SingleEvent.OpenPlayCard -> {
-
-                 parentFragmentManager.beginTransaction()
-                     .add(R.id.cardContainer, PlayFragment.newInstance(event.cinema))
-                     .addToBackStack("movies")
-                     .commit()
-             }
-         }*/
-    }
 
 
     override fun onDestroy() {
