@@ -21,6 +21,11 @@ class PlayFragment : Fragment() {
         }
     }
 
+    private val currMovie: CinemaDomainModel by lazy {
+        requireArguments().getParcelable(MOVIE_KEY)!!
+
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -30,8 +35,21 @@ class PlayFragment : Fragment() {
             .inflate(inflater, container, false)
         return binding.root
     }
-}
 
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.apply {
+
+
+            textView222.text = currMovie.originalTitle
+
+
+        }
+
+
+    }
+}
 /* private var mPlayer: SimpleExoPlayer? = null
  private lateinit var playerView: PlayerView
 
