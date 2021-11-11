@@ -4,22 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import com.lesadisa.videoonlinecinema.R
 import com.lesadisa.videoonlinecinema.base.loadImage
 import com.lesadisa.videoonlinecinema.databinding.FragmentCinemaCardBinding
 import com.lesadisa.videoonlinecinema.domain.model.CinemaDomainModel
 import com.lesadisa.videoonlinecinema.features.cinema_play_screen.ui.PlayFragment
-import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class CinemaCardFragment : Fragment() {
     private var _binding: FragmentCinemaCardBinding? = null
     private val binding get() = _binding!!
 
-    private val cardViewModel by viewModel<CinemaCardViewModel>()
-
+    //  private val cardViewModel by viewModel<CinemaCardViewModel>()
+    /* private val cardViewModel: CinemaCatalogViewModel by viewModels({requireParentFragment()})
+      */
     companion object {
         private const val MOVIE_KEY = "movie"
         fun newInstance(movie: CinemaDomainModel) = CinemaCardFragment().apply {
@@ -27,12 +26,13 @@ class CinemaCardFragment : Fragment() {
         }
     }
 
+
     private val currMovie: CinemaDomainModel by lazy {
         requireArguments().getParcelable(MOVIE_KEY)!!
 
     }
 
-    //Вызывается для создания компонентов внутри фрагмента
+    //Вызывается для создания структуры внутри фрагмента
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -54,34 +54,31 @@ class CinemaCardFragment : Fragment() {
             // отрабатываем вывод URl
 
             ibtToPlay.setOnClickListener {
-                val toast =
-                    Toast.makeText(context, "Адрес видео " + currMovie.video, Toast.LENGTH_LONG)
-                toast.show()
 
-
+                parentFragmentManager.beginTransaction()
+                    .replace(android.R.id.content, PlayFragment.newInstance(currMovie))
+                    .addToBackStack("movies").commit()
             }
-
         }
 
-//  что то здесь не так
-        //   cardViewModel.singleLiveEvents.observe(viewLifecycleOwner, ::onSingleEvent)
 
     }
-
+    //  что то здесь не так
+    //   cardViewModel.singleLiveEvents.observe(viewLifecycleOwner, ::onSingleEvent)
 
     // обрабатываем пришедший SingleEvent
 
     private fun onSingleEvent(event: SingleEvent) {
 
-        when (event) {
-            is SingleEvent.OpenPlayCard -> {
+        /* when (event) {
+             is SingleEvent.OpenPlayCard -> {
 
-                parentFragmentManager.beginTransaction()
-                    .add(R.id.cardContainer, PlayFragment.newInstance(event.cinema))
-                    .addToBackStack("movies")
-                    .commit()
-            }
-        }
+                 parentFragmentManager.beginTransaction()
+                     .add(R.id.cardContainer, PlayFragment.newInstance(event.cinema))
+                     .addToBackStack("movies")
+                     .commit()
+             }
+         }*/
     }
 
 

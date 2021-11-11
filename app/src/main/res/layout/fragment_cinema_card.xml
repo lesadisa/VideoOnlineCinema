@@ -40,6 +40,13 @@
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
+            <ImageButton
+                android:id="@+id/ibtToPlay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:src="@android:drawable/ic_media_play" />
+
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
@@ -52,17 +59,11 @@
         <TextView
             android:id="@+id/cardMovieTitle"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="70dp"
             android:gravity="center"
             android:text="@string/app_name" />
 
 
     </androidx.core.widget.NestedScrollView>
-
-    <ImageButton
-        android:id="@+id/ibtToPlay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@android:drawable/ic_media_play" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

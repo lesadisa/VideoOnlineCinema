@@ -16,4 +16,5 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(android.R.id.content, fragment).commit()
     }
+
 }
