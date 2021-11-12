@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
+
 //спросить он нужен для чего. я так понимаю для сохранения данных при поворотах
 abstract class BaseViewModel<VIEW_STATE> : ViewModel() {
 

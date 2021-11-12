@@ -1,21 +1,24 @@
 package com.lesadisa.videoonlinecinema.features.cinema_card.ui
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import com.lesadisa.videoonlinecinema.R
 import com.lesadisa.videoonlinecinema.base.loadImage
 import com.lesadisa.videoonlinecinema.databinding.FragmentCinemaCardBinding
 import com.lesadisa.videoonlinecinema.domain.model.CinemaDomainModel
-import com.lesadisa.videoonlinecinema.features.cinema_catalog_screen.ui.SingleEvent
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import com.lesadisa.videoonlinecinema.features.cinema_play_screen.ui.PlayFragment
 
-class CinemaCardFragment : Fragment(R.layout.fragment_cinema_card) {
+
+class CinemaCardFragment : Fragment() {
+    private var _binding: FragmentCinemaCardBinding? = null
+    private val binding get() = _binding!!
+
+    //  private val cardViewModel by viewModel<CinemaCardViewModel>()
+    /* private val cardViewModel: CinemaCatalogViewModel by viewModels({requireParentFragment()})
+      */
     companion object {
         private const val MOVIE_KEY = "movie"
         fun newInstance(movie: CinemaDomainModel) = CinemaCardFragment().apply {
@@ -23,18 +26,13 @@ class CinemaCardFragment : Fragment(R.layout.fragment_cinema_card) {
         }
     }
 
-    private val cardViewModel: CinemaCardViewModel by viewModel()
 
-
-
-    private var _binding: FragmentCinemaCardBinding? = null
-    private val binding get() = _binding!!
-
-        private val currMovie: CinemaDomainModel by lazy {
-            requireArguments().getParcelable(MOVIE_KEY)!!
+    private val currMovie: CinemaDomainModel by lazy {
+        requireArguments().getParcelable(MOVIE_KEY)!!
 
     }
 
+    //Вызывается для создания структуры внутри фрагмента
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -45,35 +43,25 @@ class CinemaCardFragment : Fragment(R.layout.fragment_cinema_card) {
         return binding.root
     }
 
-// вносим данные во View
+    // вносим данные во View
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
             cardPoster.loadImage(currMovie.posterPath)
+
             cardMovieTitle.text = currMovie.originalTitle
-            
-            // отрабатываем вывод сообщения 2
+
+            // отрабатываем вывод URl
 
             ibtToPlay.setOnClickListener {
-                val toast = Toast.makeText(context, "Нажата кнопка 1", Toast.LENGTH_LONG)
-                toast.show()
-            }
-
-        }
-
-    }
-
-    // обрабатываем пришедший SingleEvent
-    private fun onSingleEvent(event: SingleEvent) {
-        when (event) {
-            is SingleEvent.OpenMovieCard -> {
 
                 parentFragmentManager.beginTransaction()
-                    .add(R.id.moviesContainer, CinemaCardFragment.newInstance(event.cinema))
-                    .addToBackStack("movies")
-                    .commit()
+                    .replace(android.R.id.content, PlayFragment.newInstance(currMovie))
+                    .addToBackStack("movies").commit()
             }
         }
+
+
     }
 
 
