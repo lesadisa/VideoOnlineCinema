@@ -13,8 +13,9 @@ import com.lesadisa.videoonlinecinema.features.cinema_play_screen.ui.PlayFragmen
 
 
 class CinemaCardFragment : Fragment() {
-    private var _binding: FragmentCinemaCardBinding? = null
-    private val binding get() = _binding!!
+    //   private var _binding: FragmentCinemaCardBinding? = null
+    //  private val binding get() = _binding!!
+    private lateinit var binding: FragmentCinemaCardBinding
 
     //  private val cardViewModel by viewModel<CinemaCardViewModel>()
     /* private val cardViewModel: CinemaCatalogViewModel by viewModels({requireParentFragment()})
@@ -38,7 +39,7 @@ class CinemaCardFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentCinemaCardBinding
+        binding = FragmentCinemaCardBinding
             .inflate(inflater, container, false)
         return binding.root
     }
@@ -48,7 +49,7 @@ class CinemaCardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
             cardPoster.loadImage(currMovie.posterPath)
-
+            cardMovieoverview.text = currMovie.overview
             cardMovieTitle.text = currMovie.originalTitle
 
             // отрабатываем вывод URl
@@ -67,7 +68,7 @@ class CinemaCardFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        _binding = null
+        //binding = null
     }
 
 }

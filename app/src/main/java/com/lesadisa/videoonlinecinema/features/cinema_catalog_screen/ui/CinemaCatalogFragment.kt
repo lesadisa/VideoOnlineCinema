@@ -15,9 +15,9 @@ import com.lesadisa.videoonlinecinema.features.cinema_catalog_screen.ui.adapter.
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CinemaCatalogFragment : Fragment() {
-    private var _binding: FragmentCinemaCatalogBinding? = null
-    private val binding get() = _binding!!
-
+    //   private var _binding: FragmentCinemaCatalogBinding? = null
+    //  private val binding get() = _binding!!
+    private lateinit var binding: FragmentCinemaCatalogBinding
     private val moviesViewModel by viewModel<CinemaCatalogViewModel>()
 
     //получаем сообщение от Adaptera о нажатии
@@ -32,7 +32,7 @@ class CinemaCatalogFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentCinemaCatalogBinding
+        binding = FragmentCinemaCatalogBinding
             .inflate(inflater, container, false)
         return binding.root
     }
@@ -55,14 +55,15 @@ class CinemaCatalogFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
+        //binding = null
     }
 
     private fun render(viewState: ViewState) {
         binding.pbMovies.isGone = !viewState.isLoading
         moviesCatalogAdapter.updateList(viewState.cinema)
     }
-// обрабатываем пришедший SingleEvent
+
+    // обрабатываем пришедший SingleEvent
     private fun onSingleEvent(event: SingleEvent) {
         when (event) {
             is SingleEvent.OpenMovieCard -> {

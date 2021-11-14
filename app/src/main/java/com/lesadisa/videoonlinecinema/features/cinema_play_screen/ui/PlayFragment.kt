@@ -1,6 +1,5 @@
 package com.lesadisa.videoonlinecinema.features.cinema_play_screen.ui
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +20,8 @@ class PlayFragment : Fragment() {
     private var _binding: FragmentPlayerBinding? = null
     private val binding get() = _binding!!
     private var exoPlayer: ExoPlayer? = null
+//    private lateinit var binding: FragmentPlayerBinding
+
 
     companion object {
         private const val MOVIE_KEY = "movie"
