@@ -29,8 +29,6 @@ class PlayFragment : Fragment() {
             arguments = bundleOf(Pair(MOVIE_KEY, movie))
         }
 
-    /* const val STREAM_URL =
-             "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"*/
 
     }
 
@@ -71,25 +69,25 @@ class PlayFragment : Fragment() {
         return mediaSource
     }
 
-    public override fun onStart() {
+    override fun onStart() {
         super.onStart()
 
         if (Util.SDK_INT > 23) initializePlayer()
     }
 
-    public override fun onResume() {
+    override fun onResume() {
         super.onResume()
 
         if (Util.SDK_INT <= 23) initializePlayer()
     }
 
-    public override fun onPause() {
+    override fun onPause() {
         super.onPause()
 
         if (Util.SDK_INT <= 23) releasePlayer()
     }
 
-    public override fun onStop() {
+    override fun onStop() {
         super.onStop()
 
         if (Util.SDK_INT > 23) releasePlayer()
