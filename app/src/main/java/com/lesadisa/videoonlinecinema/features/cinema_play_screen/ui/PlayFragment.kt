@@ -59,7 +59,7 @@ class PlayFragment : Fragment() {
     }
 
     private fun buildMediaSource(): MediaSource {
-        // Create a data source factory.
+       // Create a data source factory.
         val dataSourceFactory: DataSource.Factory = DefaultHttpDataSource.Factory()
 
         // Create a progressive media source pointing to a stream uri.
