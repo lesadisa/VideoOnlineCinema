@@ -29,7 +29,7 @@ class PlayFragment : Fragment() {
             arguments = bundleOf(Pair(MOVIE_KEY, movie))
         }
 
-        /* const val STREAM_URL =
+    /* const val STREAM_URL =
              "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"*/
 
     }
