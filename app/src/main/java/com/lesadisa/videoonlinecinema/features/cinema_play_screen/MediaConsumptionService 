@@ -1,0 +1,159 @@
+class MediaConsumptionService : Service() {
+
+    private var player: SimpleExoPlayer? = null
+    var image: Bitmap? = null
+    private lateinit var playerNotificationManager: PlayerNotificationManager
+
+    private val NOTIFICATION_CHANNEL_ID = "playback_channel"
+    private val NOTIFICATION_ID = 2
+    private var additionalJson: String? = null
+    private var trackId = 0L
+    private var trackTitle = ""
+    private var trackThumbUrl = ""
+
+    override fun onBind(intent: Intent?): IBinder? {
+        return null
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        player = VideoPlayer.getInstance().player
+    }
+
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        val context = this
+        val bundle = intent?.extras
+        if (bundle != null) {
+            trackId = bundle.getLong(MVConstants.PLAYBACK_TRACK_ID, 0)
+            trackTitle = bundle.getString(MVConstants.PLAYBACK_TRACK_TITLE, "")
+            trackThumbUrl = bundle.getString(MVConstants.PLAYBACK_TRACK_THUMB, "")
+            additionalJson = bundle.getString(MVConstants.MEDIA_JSON, "")
+            Glide.with(context)
+                    .asBitmap()
+                    .load(trackThumbUrl)
+                    .into(object : CustomTarget<Bitmap>() {
+
+                        override fun onLoadFailed(errorDrawable: Drawable?) {
+                            super.onLoadFailed(errorDrawable)
+                            addNotificationToPlayer()
+                        }
+
+                        override fun onResourceReady(resource: Bitmap, transition:
+                        Transition<in Bitmap>?) {
+                            image = resource
+                            addNotificationToPlayer()
+                        }
+
+                        override fun onLoadCleared(placeholder: Drawable?) {
+                        }
+                    })
+
+        }
+
+
+        return START_NOT_STICKY
+    }
+
+    private fun addNotificationToPlayer() {
+        if (player != null) {
+
+            playerNotificationManager = createWithNotificationChannel(
+                    this,
+                    NOTIFICATION_CHANNEL_ID,
+                    R.string.playback,
+                    0,
+                    NOTIFICATION_ID,
+                    object : MediaDescriptionAdapter {
+
+                        override fun createCurrentContentIntent(player: Player?): PendingIntent? {
+                            val intent = VideoPlayer.getInstance().mediaSessionIntent
+                            intent.putExtra(MVConstants.MEDIA_JSON, additionalJson)
+                            intent.putExtra(MVConstants.PLAYBACK_TRACK_ID, trackId)
+                            intent.putExtra(MVConstants.FROM_NOTIFICATION, true)
+                            return PendingIntent.getActivity(applicationContext,
+                                    2, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+                        }
+
+                        override fun getCurrentContentText(player: Player?): String? {
+                            return ""
+                        }
+
+                        override fun getCurrentContentTitle(player: Player?): String {
+                            return trackTitle
+                        }
+
+                        override fun getCurrentLargeIcon(player: Player?, callback:
+                        BitmapCallback?): Bitmap? {
+                            return image
+
+                        }
+                    },
+                    object : NotificationListener {
+
+                        override fun onNotificationPosted(notificationId: Int,
+                                                          notification: Notification?,
+                                                          ongoing: Boolean) {
+                            super.onNotificationPosted(notificationId, notification, ongoing)
+                            if (!ongoing) {
+                                stopForeground(false)
+                            } else {
+                                startForeground(notificationId, notification)
+                            }
+                        }
+
+                        override fun onNotificationCancelled(notificationId: Int,
+                                                             dismissedByUser: Boolean) {
+                            super.onNotificationCancelled(notificationId, dismissedByUser)
+                            stopSelf()
+                        }
+
+                    }
+            )
+            // omit skip previous and next actions
+            playerNotificationManager.setUseNavigationActions(false);
+            // omit fast forward action by setting the increment to zero
+            playerNotificationManager.setFastForwardIncrementMs(0);
+            // omit rewind action by setting the increment to zero
+            playerNotificationManager.setRewindIncrementMs(0);
+
+            playerNotificationManager.setSmallIcon(R.drawable.ico_notification_wings)
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                playerNotificationManager.setColor(ResourceUtils.getColor(R.color.mva_blue))
+            }
+
+            //assign the player to it
+            playerNotificationManager.setPlayer(player)
+        }
+    }
+
+    override fun onTaskRemoved(rootIntent: Intent) {
+        stopService()
+        super.onTaskRemoved(rootIntent)
+    }
+
+    /**
+     * Stop service and release the video player
+     * This is only executed if we remove the app from tasks or memory is low
+     */
+    private fun stopService() {
+        if (Util.SDK_INT >= 26) {
+            stopForeground(true)
+        } else {
+            stopSelf()
+        }
+        VideoPlayer.getInstance().release()
+    }
+
+    override fun onTrimMemory(level: Int) {
+        super.onTrimMemory(level)
+    }
+
+    override fun onDestroy() {
+        if (::playerNotificationManager.isInitialized) {
+            playerNotificationManager.setPlayer(null)
+        }
+     
+        super.onDestroy()
+    }
+}

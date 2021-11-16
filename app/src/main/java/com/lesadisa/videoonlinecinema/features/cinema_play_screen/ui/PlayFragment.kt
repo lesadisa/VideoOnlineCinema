@@ -22,6 +22,10 @@ class PlayFragment : Fragment() {
     private var exoPlayer: ExoPlayer? = null
 //    private lateinit var binding: FragmentPlayerBinding
 
+// добавил 16.11.2021
+val intent = Intent(mActivity, MediaConsumptionService::class.java)
+          val bundle = Bundle()
+          Util.startForegroundService(mActivity, intent)
 
     companion object {
         private const val MOVIE_KEY = "movie"
