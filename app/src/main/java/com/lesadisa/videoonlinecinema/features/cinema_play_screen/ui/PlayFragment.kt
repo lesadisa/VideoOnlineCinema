@@ -119,7 +119,7 @@ class PlayFragment : Fragment() {
         if (exoPlayer == null) {
             return
         }
-        //release player when done
+        //release player when done 
         exoPlayer!!.release()
         exoPlayer = null
     }
