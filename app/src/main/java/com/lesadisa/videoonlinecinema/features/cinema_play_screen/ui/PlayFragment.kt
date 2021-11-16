@@ -1,18 +1,30 @@
 package com.lesadisa.videoonlinecinema.features.cinema_play_screen.ui
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context.NOTIFICATION_SERVICE
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
+import com.google.android.exoplayer2.ui.PlayerNotificationManager
 import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import com.google.android.exoplayer2.util.Util
+import com.lesadisa.videoonlinecinema.MainActivity
+import com.lesadisa.videoonlinecinema.R
 import com.lesadisa.videoonlinecinema.databinding.FragmentPlayerBinding
 import com.lesadisa.videoonlinecinema.domain.model.CinemaDomainModel
 
@@ -20,7 +32,11 @@ class PlayFragment : Fragment() {
     private var _binding: FragmentPlayerBinding? = null
     private val binding get() = _binding!!
     private var exoPlayer: ExoPlayer? = null
-//    private lateinit var binding: FragmentPlayerBinding
+
+    //    private lateinit var binding: FragmentPlayerBinding
+    private lateinit var playerNotificationManager: PlayerNotificationManager//16112021
+    private val CHANNEL_ID = "channel_id_example_01"
+    private val notificationID = 101
 
 // добавил 16.11.2021
 val intent = Intent(mActivity, MediaConsumptionService::class.java)
@@ -41,6 +57,7 @@ val intent = Intent(mActivity, MediaConsumptionService::class.java)
 
     }
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -58,12 +75,14 @@ val intent = Intent(mActivity, MediaConsumptionService::class.java)
 //            setMediaItem(MediaItem.fromUri(currMovie.video))
             setMediaSource(buildMediaSource())
             playWhenReady = true
+            initPlayerNotificationManager()
             prepare()
         }
+
     }
 
     private fun buildMediaSource(): MediaSource {
-       // Create a data source factory.
+        // Create a data source factory.
         val dataSourceFactory: DataSource.Factory = DefaultHttpDataSource.Factory()
 
         // Create a progressive media source pointing to a stream uri.
@@ -76,7 +95,10 @@ val intent = Intent(mActivity, MediaConsumptionService::class.java)
     override fun onStart() {
         super.onStart()
 
-        if (Util.SDK_INT > 23) initializePlayer()
+        if (Util.SDK_INT > 23) {
+            initializePlayer()
+            createNotification()
+        }
     }
 
     override fun onResume() {
@@ -101,8 +123,89 @@ val intent = Intent(mActivity, MediaConsumptionService::class.java)
         if (exoPlayer == null) {
             return
         }
-        //release player when done
+        //release player when done 
         exoPlayer!!.release()
         exoPlayer = null
     }
+
+    private fun initPlayerNotificationManager() {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            val name = "Notification Title"
+            val descriptionText = "Notification descriptionText"
+            val importance: Int = NotificationManager.IMPORTANCE_DEFAULT
+            val channel: NotificationChannel = NotificationChannel(
+                CHANNEL_ID,
+                name,
+                importance
+            ).apply { description = descriptionText }
+
+            // Register the channel with the system
+            val notificationManager: NotificationManager =
+                context?.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+//        playerNotificationManager.setColor(R.color.design_default_color_primary)
+        }
+    }
+
+    private fun createNotification() {
+        val intent = Intent(requireContext(), MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+
+        val pendingIntent: PendingIntent = PendingIntent.getActivity(requireContext(), 0, intent, 0)
+        val bitmap: Bitmap? = BitmapFactory.decodeResource(
+            requireContext().resources,
+            R.drawable.ic_dratwo
+        ) //тут под вопросом
+        val bitmapLargeIcon: Bitmap =
+            BitmapFactory.decodeResource(requireContext().resources, R.drawable.ic_dratw)
+
+
+        val builder = NotificationCompat.Builder(requireContext(), CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_placeholder)
+            .setContentTitle("Example Title")
+            .setContentText("Ecample Description")
+            .setLargeIcon(bitmapLargeIcon)
+            .setStyle(NotificationCompat.BigPictureStyle().bigPicture(bitmap))
+            .setContentIntent(pendingIntent)
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+
+        with(NotificationManagerCompat.from(requireContext())) {
+            notify(notificationID, builder.build())
+        }
+
+    }
+
+
+    /* playerNotificationManager = PlayerNotificationManager.Builder(requireContext(),
+     NOTIFICATION_ID,
+     NOTIFICATION_CHANNEL,
+     object : PlayerNotificationManager.MediaDescriptionAdapter {
+         override fun getCurrentContentTitle(player: Player): CharSequence =
+             player.currentMediaItem?.mediaMetadata?.title ?: "Video"
+
+         override fun createCurrentContentIntent(player: Player): PendingIntent? {
+             return null
+         }
+
+         override fun getCurrentContentText(player: Player): CharSequence? {
+             return "Music Content Text"
+         }
+
+
+         override fun getCurrentLargeIcon(
+             player: Player,
+             callback: PlayerNotificationManager.BitmapCallback
+         ): Bitmap? {
+             return BitmapFactory.decodeResource(
+                 requireContext().resources,
+                 R.drawable.ic_placeholder
+             )
+         }
+
+     })
+     .build()
+     playerNotificationManager.setColor(R.color.grey_200)
+     playerNotificationManager.setPlayer(player)
+ }*/
 }
