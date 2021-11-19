@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setFragment(fragment: Fragment) {
-        // commit обязателен
+        //  commit обязателен
         supportFragmentManager.beginTransaction()
             .replace(android.R.id.content, fragment).commit()
     }
