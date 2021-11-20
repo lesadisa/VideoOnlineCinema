@@ -29,12 +29,10 @@ import com.lesadisa.videoonlinecinema.databinding.FragmentPlayerBinding
 import com.lesadisa.videoonlinecinema.domain.model.CinemaDomainModel
 
 class PlayFragment : Fragment() {
-    private var _binding: FragmentPlayerBinding? = null
-    private val binding get() = _binding!!
-    private var exoPlayer: ExoPlayer? = null
 
-    //    private lateinit var binding: FragmentPlayerBinding
-    private lateinit var playerNotificationManager: PlayerNotificationManager//16112021
+    private var exoPlayer: ExoPlayer? = null
+    private lateinit var binding: FragmentPlayerBinding
+    private lateinit var playerNotificationManager: PlayerNotificationManager
     private val CHANNEL_ID = "channel_id_example_01"
     private val notificationID = 101
 
@@ -44,13 +42,10 @@ class PlayFragment : Fragment() {
         fun newInstance(movie: CinemaDomainModel) = PlayFragment().apply {
             arguments = bundleOf(Pair(MOVIE_KEY, movie))
         }
-
-
     }
 
     private val currMovie: CinemaDomainModel by lazy {
         requireArguments().getParcelable(MOVIE_KEY)!!
-
     }
 
 
@@ -59,7 +54,7 @@ class PlayFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentPlayerBinding
+        binding = FragmentPlayerBinding
             .inflate(inflater, container, false)
         return binding.root
     }
@@ -68,13 +63,12 @@ class PlayFragment : Fragment() {
     private fun initializePlayer() {
         exoPlayer = ExoPlayer.Builder(requireContext()).build().apply {
             binding.playerView.player = this
-//            setMediaItem(MediaItem.fromUri(currMovie.video))
+            //        setMediaItem(MediaItem.fromUri(currMovie.video))
             setMediaSource(buildMediaSource())
             playWhenReady = true
             initPlayerNotificationManager()
             prepare()
         }
-
     }
 
     private fun buildMediaSource(): MediaSource {
@@ -139,6 +133,7 @@ class PlayFragment : Fragment() {
             val notificationManager: NotificationManager =
                 context?.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)
+
 //        playerNotificationManager.setColor(R.color.design_default_color_primary)
         }
     }
@@ -152,56 +147,28 @@ class PlayFragment : Fragment() {
         val bitmap: Bitmap? = BitmapFactory.decodeResource(
             requireContext().resources,
             R.drawable.ic_dratwo
-        ) //тут под вопросом
+        )
         val bitmapLargeIcon: Bitmap =
             BitmapFactory.decodeResource(requireContext().resources, R.drawable.ic_dratw)
 
 
         val builder = NotificationCompat.Builder(requireContext(), CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_placeholder)
-            .setContentTitle("Example Title")
-            .setContentText("Ecample Description")
+            .setContentTitle(currMovie.title)
+            .setContentText(currMovie.overview)
             .setLargeIcon(bitmapLargeIcon)
             .setStyle(NotificationCompat.BigPictureStyle().bigPicture(bitmap))
             .setContentIntent(pendingIntent)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
+
         with(NotificationManagerCompat.from(requireContext())) {
             notify(notificationID, builder.build())
+
+
         }
 
     }
 
 
-    /* playerNotificationManager = PlayerNotificationManager.Builder(requireContext(),
-     NOTIFICATION_ID,
-     NOTIFICATION_CHANNEL,
-     object : PlayerNotificationManager.MediaDescriptionAdapter {
-         override fun getCurrentContentTitle(player: Player): CharSequence =
-             player.currentMediaItem?.mediaMetadata?.title ?: "Video"
-
-         override fun createCurrentContentIntent(player: Player): PendingIntent? {
-             return null
-         }
-
-         override fun getCurrentContentText(player: Player): CharSequence? {
-             return "Music Content Text"
-         }
-
-
-         override fun getCurrentLargeIcon(
-             player: Player,
-             callback: PlayerNotificationManager.BitmapCallback
-         ): Bitmap? {
-             return BitmapFactory.decodeResource(
-                 requireContext().resources,
-                 R.drawable.ic_placeholder
-             )
-         }
-
-     })
-     .build()
-     playerNotificationManager.setColor(R.color.grey_200)
-     playerNotificationManager.setPlayer(player)
- }*/
 }
