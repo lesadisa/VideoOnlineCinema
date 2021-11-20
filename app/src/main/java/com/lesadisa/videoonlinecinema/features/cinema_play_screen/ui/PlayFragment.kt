@@ -19,6 +19,7 @@ import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
+import com.google.android.exoplayer2.ui.PlayerNotificationManager
 import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import com.google.android.exoplayer2.util.Util
@@ -31,7 +32,7 @@ class PlayFragment : Fragment() {
 
     private var exoPlayer: ExoPlayer? = null
     private lateinit var binding: FragmentPlayerBinding
-  //  private lateinit var playerNotificationManager: PlayerNotificationManager
+    private lateinit var playerNotificationManager: PlayerNotificationManager
     private val CHANNEL_ID = "channel_id_example_01"
     private val notificationID = 101
 
