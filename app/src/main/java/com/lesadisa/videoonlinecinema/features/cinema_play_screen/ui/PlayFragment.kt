@@ -19,7 +19,7 @@ import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
-import com.google.android.exoplayer2.ui.PlayerNotificationManager
+//import com.google.android.exoplayer2.ui.PlayerNotificationManager
 import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import com.google.android.exoplayer2.util.Util
@@ -29,14 +29,15 @@ import com.lesadisa.videoonlinecinema.databinding.FragmentPlayerBinding
 import com.lesadisa.videoonlinecinema.domain.model.CinemaDomainModel
 
 class PlayFragment : Fragment() {
-    private var _binding: FragmentPlayerBinding? = null
-    private val binding get() = _binding!!
-    private var exoPlayer: ExoPlayer? = null
 
-    //    private lateinit var binding: FragmentPlayerBinding
-    private lateinit var playerNotificationManager: PlayerNotificationManager//16112021
+
+    private var exoPlayer: ExoPlayer? = null
+    private lateinit var binding: FragmentPlayerBinding
+
+
     private val CHANNEL_ID = "channel_id_example_01"
     private val notificationID = 101
+    private lateinit var backgroundPlayService: BackgroundPlayService
 
 
     companion object {
@@ -44,13 +45,10 @@ class PlayFragment : Fragment() {
         fun newInstance(movie: CinemaDomainModel) = PlayFragment().apply {
             arguments = bundleOf(Pair(MOVIE_KEY, movie))
         }
-
-
     }
 
     private val currMovie: CinemaDomainModel by lazy {
         requireArguments().getParcelable(MOVIE_KEY)!!
-
     }
 
 
@@ -59,7 +57,7 @@ class PlayFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentPlayerBinding
+        binding = FragmentPlayerBinding
             .inflate(inflater, container, false)
         return binding.root
     }
@@ -68,24 +66,30 @@ class PlayFragment : Fragment() {
     private fun initializePlayer() {
         exoPlayer = ExoPlayer.Builder(requireContext()).build().apply {
             binding.playerView.player = this
-//            setMediaItem(MediaItem.fromUri(currMovie.video))
+            // setMediaItem(MediaItem.fromUri(currMovie.video))
+            // Очищает список воспроизведения, добавляет указанный MediaSource и сбрасывает позицию в положение по умолчанию.
             setMediaSource(buildMediaSource())
+            //Устанавливает, должно ли продолжаться воспроизведение, когда getPlaybackState () == STATE_READY.
+            //Если проигрыватель уже находится в состоянии готовности, этот метод приостанавливает и возобновляет воспроизведение.
+            //Параметры:
+            //playWhenReady - должно ли воспроизведение продолжаться, когда оно будет готово.
             playWhenReady = true
-            initPlayerNotificationManager()
+            //   initPlayerNotificationManager()
+            backgroundPlayService.initializePlayer(requireContext())
             prepare()
         }
 
     }
 
+    // готовит источник данных
     private fun buildMediaSource(): MediaSource {
-        // Create a data source factory.
+        //Создайте фабрику источников данных.
         val dataSourceFactory: DataSource.Factory = DefaultHttpDataSource.Factory()
 
-        // Create a progressive media source pointing to a stream uri.
-        val mediaSource: MediaSource = ProgressiveMediaSource.Factory(dataSourceFactory)
-            .createMediaSource(MediaItem.fromUri(currMovie.video))
+        // Создайте прогрессивный медиа-источник, указывающий на URI потока.
 
-        return mediaSource
+        return ProgressiveMediaSource.Factory(dataSourceFactory)
+            .createMediaSource(MediaItem.fromUri(currMovie.video))
     }
 
     override fun onStart() {
@@ -119,7 +123,7 @@ class PlayFragment : Fragment() {
         if (exoPlayer == null) {
             return
         }
-        //release player when done 
+        //release player when done
         exoPlayer!!.release()
         exoPlayer = null
     }
@@ -139,7 +143,7 @@ class PlayFragment : Fragment() {
             val notificationManager: NotificationManager =
                 context?.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)
-//        playerNotificationManager.setColor(R.color.design_default_color_primary)
+            //   playerNotificationManager.setColor(R.color.design_default_color_primary)
         }
     }
 
@@ -148,7 +152,8 @@ class PlayFragment : Fragment() {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
 
-        val pendingIntent: PendingIntent = PendingIntent.getActivity(requireContext(), 0, intent, 0)
+        val pendingIntent: PendingIntent =
+            PendingIntent.getActivity(requireContext(), 0, intent, PendingIntent.FLAG_IMMUTABLE)
         val bitmap: Bitmap? = BitmapFactory.decodeResource(
             requireContext().resources,
             R.drawable.ic_dratwo
@@ -160,7 +165,7 @@ class PlayFragment : Fragment() {
         val builder = NotificationCompat.Builder(requireContext(), CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_placeholder)
             .setContentTitle("Example Title")
-            .setContentText("Ecample Description")
+            .setContentText("Example Description")
             .setLargeIcon(bitmapLargeIcon)
             .setStyle(NotificationCompat.BigPictureStyle().bigPicture(bitmap))
             .setContentIntent(pendingIntent)
@@ -172,36 +177,5 @@ class PlayFragment : Fragment() {
 
     }
 
-
-    /* playerNotificationManager = PlayerNotificationManager.Builder(requireContext(),
-     NOTIFICATION_ID,
-     NOTIFICATION_CHANNEL,
-     object : PlayerNotificationManager.MediaDescriptionAdapter {
-         override fun getCurrentContentTitle(player: Player): CharSequence =
-             player.currentMediaItem?.mediaMetadata?.title ?: "Video"
-
-         override fun createCurrentContentIntent(player: Player): PendingIntent? {
-             return null
-         }
-
-         override fun getCurrentContentText(player: Player): CharSequence? {
-             return "Music Content Text"
-         }
-
-
-         override fun getCurrentLargeIcon(
-             player: Player,
-             callback: PlayerNotificationManager.BitmapCallback
-         ): Bitmap? {
-             return BitmapFactory.decodeResource(
-                 requireContext().resources,
-                 R.drawable.ic_placeholder
-             )
-         }
-
-     })
-     .build()
-     playerNotificationManager.setColor(R.color.grey_200)
-     playerNotificationManager.setPlayer(player)
- }*/
 }
+
