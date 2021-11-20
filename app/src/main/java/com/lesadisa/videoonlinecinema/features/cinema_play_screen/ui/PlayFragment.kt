@@ -1,13 +1,18 @@
 package com.lesadisa.videoonlinecinema.features.cinema_play_screen.ui
 
+//import com.google.android.exoplayer2.ui.PlayerNotificationManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.content.ComponentName
+import android.content.Context
 import android.content.Context.NOTIFICATION_SERVICE
 import android.content.Intent
+import android.content.ServiceConnection
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.os.IBinder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +24,7 @@ import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
-//import com.google.android.exoplayer2.ui.PlayerNotificationManager
+import com.google.android.exoplayer2.ui.PlayerControlView
 import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import com.google.android.exoplayer2.util.Util
@@ -33,8 +38,7 @@ class PlayFragment : Fragment() {
 
     private var exoPlayer: ExoPlayer? = null
     private lateinit var binding: FragmentPlayerBinding
-
-
+    private lateinit var playerControlView: PlayerControlView
     private val CHANNEL_ID = "channel_id_example_01"
     private val notificationID = 101
     private lateinit var backgroundPlayService: BackgroundPlayService
@@ -49,6 +53,43 @@ class PlayFragment : Fragment() {
 
     private val currMovie: CinemaDomainModel by lazy {
         requireArguments().getParcelable(MOVIE_KEY)!!
+    }
+
+    private val connection = object : ServiceConnection {
+
+        override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
+
+
+            if (service is BackgroundPlayService.BackgroundServiceBinder) {
+
+                if (service.getPlayingMediaID() != currMovie.id) {
+
+                    backgroundPlayService = service.getService()
+                    backgroundPlayService.updatePlayer(currMovie)
+                }
+
+
+                backgroundPlayService = service.getService()
+                playerControlView.player = service.getExoplayer()
+            }
+        }
+
+        override fun onServiceDisconnected(name: ComponentName?) {
+
+            unBindService()
+        }
+    }
+
+    private fun unBindService() {
+
+        backgroundPlayService.stopSelf()
+        requireActivity().unbindService(connection)
+    }
+
+    private fun initService() {
+
+        val intent = Intent(requireContext(), BackgroundPlayService::class.java)
+        requireActivity().bindService(intent, connection, Context.BIND_AUTO_CREATE)
     }
 
 
@@ -75,7 +116,8 @@ class PlayFragment : Fragment() {
             //playWhenReady - должно ли воспроизведение продолжаться, когда оно будет готово.
             playWhenReady = true
             //   initPlayerNotificationManager()
-            backgroundPlayService.initializePlayer(requireContext())
+            initService()
+            // backgroundPlayService.initializePlayer(requireContext())
             prepare()
         }
 
@@ -85,9 +127,7 @@ class PlayFragment : Fragment() {
     private fun buildMediaSource(): MediaSource {
         //Создайте фабрику источников данных.
         val dataSourceFactory: DataSource.Factory = DefaultHttpDataSource.Factory()
-
         // Создайте прогрессивный медиа-источник, указывающий на URI потока.
-
         return ProgressiveMediaSource.Factory(dataSourceFactory)
             .createMediaSource(MediaItem.fromUri(currMovie.video))
     }
