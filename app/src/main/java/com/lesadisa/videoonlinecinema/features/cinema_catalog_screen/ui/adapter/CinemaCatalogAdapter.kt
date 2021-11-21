@@ -2,7 +2,6 @@ package com.lesadisa.videoonlinecinema.features.cinema_catalog_screen.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.lesadisa.videoonlinecinema.base.loadImage
 import com.lesadisa.videoonlinecinema.base.setThrottledClickListener
@@ -47,13 +46,14 @@ class CinemaCatalogAdapter(
     }
 
     fun updateList(newMovies: List<CinemaDomainModel>) {
-        val diffCallback = DiffUtil(
-            oldMoviesList = movies,
-            newMoviesList = newMovies
-        )
-        val diffResult = DiffUtil.calculateDiff(diffCallback)
-        diffResult.dispatchUpdatesTo(this)
+        /* val diffCallback = DiffUtil(
+             oldMoviesList = movies,
+             newMoviesList = newMovies
+         )*/
+        /* val diffResult = DiffUtil.calculateDiff(diffCallback)
+         diffResult.dispatchUpdatesTo(this)*/
 
         movies = newMovies
+        notifyDataSetChanged()
     }
 }

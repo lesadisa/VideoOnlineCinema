@@ -63,7 +63,6 @@ class PlayFragment : Fragment() {
     private fun initializePlayer() {
         exoPlayer = ExoPlayer.Builder(requireContext()).build().apply {
             binding.playerView.player = this
-            //        setMediaItem(MediaItem.fromUri(currMovie.video))
             setMediaSource(buildMediaSource())
             playWhenReady = true
             initPlayerNotificationManager()
@@ -134,7 +133,6 @@ class PlayFragment : Fragment() {
                 context?.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)
 
-//        playerNotificationManager.setColor(R.color.design_default_color_primary)
         }
     }
 
