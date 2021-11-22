@@ -6,7 +6,6 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val cinemaItemCardmodule = module {
-
     viewModel<CinemaCardViewModel> {
         CinemaCardViewModel(get<CinemaInteractor>())
     }

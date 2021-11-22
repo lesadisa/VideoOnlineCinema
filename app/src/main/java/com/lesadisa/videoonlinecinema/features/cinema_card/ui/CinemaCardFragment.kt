@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import com.lesadisa.videoonlinecinema.base.loadImage
 import com.lesadisa.videoonlinecinema.databinding.FragmentCinemaCardBinding
 import com.lesadisa.videoonlinecinema.domain.model.CinemaDomainModel
-import com.lesadisa.videoonlinecinema.features.cinema_play_screen.ui.PlayFragment
 
 
 class CinemaCardFragment : Fragment() {
