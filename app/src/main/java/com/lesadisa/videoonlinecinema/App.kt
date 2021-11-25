@@ -1,6 +1,7 @@
 package com.lesadisa.videoonlinecinema
 
 import android.app.Application
+import com.lesadisa.videoonlinecinema.features.cinema_card.di.cinemaItemCardmodule
 import com.lesadisa.videoonlinecinema.staroe.di.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -13,7 +14,7 @@ class App : Application() {
         startKoin {
             androidLogger()
             androidContext(this@App)
-            modules(appModule)
+            modules(appModule, cinemaItemCardmodule)
         }
     }
 }

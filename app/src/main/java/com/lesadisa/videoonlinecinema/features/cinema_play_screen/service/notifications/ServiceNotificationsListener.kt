@@ -21,7 +21,7 @@ class ServiceNotificationsListener(
 ) : PlayerNotificationManager.NotificationListener {
 
     private val remoteView
-            by lazy { RemoteViews(playerService.packageName, R.layout.fragment_movie_player) }
+            by lazy { RemoteViews(playerService.packageName, R.layout.fragment_player) }
 
     private val manager =
         playerService.getSystemService(Context.NOTIFICATION_SERVICE)

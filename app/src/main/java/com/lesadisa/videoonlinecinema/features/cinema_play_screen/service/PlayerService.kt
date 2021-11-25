@@ -47,6 +47,8 @@ class PlayerService : Service() {
     override fun onCreate() {
         super.onCreate()
         notificationManager.showNotification(exoPlayer)
+
+
     }
 
     override fun onTaskRemoved(rootIntent: Intent?) {
@@ -66,6 +68,7 @@ class PlayerService : Service() {
             setMediaItem(MediaItem.fromUri(url))
             addListener(eventsListener)
             prepare()
+
         }
     }
 

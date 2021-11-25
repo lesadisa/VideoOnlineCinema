@@ -8,7 +8,7 @@ import com.lesadisa.videoonlinecinema.domain.CinemaInteractor
 
 
 class CinemaCardViewModel(
-    private val cinemaInteractor: CinemaInteractor
+    private val cinemaInteractor: CinemaInteractor,
 ) : BaseViewModel<ViewState>() {
     val singleLiveEvents = SingleLiveEvent<SingleEvent>()
 

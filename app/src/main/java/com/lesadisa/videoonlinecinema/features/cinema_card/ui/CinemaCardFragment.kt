@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.lesadisa.videoonlinecinema.base.loadImage
 import com.lesadisa.videoonlinecinema.databinding.FragmentCinemaCardBinding
 import com.lesadisa.videoonlinecinema.domain.model.CinemaDomainModel
+import com.lesadisa.videoonlinecinema.features.cinema_play_screen.ui.MoviePlayerFragment
 
 
 class CinemaCardFragment : Fragment() {
@@ -56,7 +57,7 @@ class CinemaCardFragment : Fragment() {
             ibtToPlay.setOnClickListener {
 
                 parentFragmentManager.beginTransaction()
-                    .replace(android.R.id.content, PlayFragment.newInstance(currMovie))
+                    .replace(android.R.id.content, MoviePlayerFragment.newInstance(currMovie.video))
                     .addToBackStack("movies").commit()
             }
         }
