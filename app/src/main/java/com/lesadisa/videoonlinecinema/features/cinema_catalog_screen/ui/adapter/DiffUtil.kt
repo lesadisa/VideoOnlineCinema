@@ -1,9 +1,6 @@
 package com.lesadisa.videoonlinecinema.features.cinema_catalog_screen.ui.adapter
 
-import androidx.recyclerview.widget.DiffUtil
-import com.lesadisa.videoonlinecinema.domain.model.CinemaDomainModel
-
-class DiffUtil(
+class DiffUtil/*(
     private val oldMoviesList: List<CinemaDomainModel>,
     private val newMoviesList: List<CinemaDomainModel>
 ) : DiffUtil.Callback() {
@@ -16,4 +13,4 @@ class DiffUtil(
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
         oldMoviesList[oldItemPosition] == newMoviesList[newItemPosition]
-}
+}*/

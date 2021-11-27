@@ -14,9 +14,9 @@ class CacheControlInterceptor : Interceptor {
 
         val shouldUseCache = request.header(CACHE_CONTROL_HEADER) != CACHE_CONTROL_NO_CACHE
         if (!shouldUseCache) return originalResponse
-
+// исменил с 10 минут на 3600
         val cacheControl = CacheControl.Builder()
-            .maxAge(10, TimeUnit.MINUTES)
+            .maxAge(3600, TimeUnit.MINUTES)
             .build()
 
         return originalResponse.newBuilder()
