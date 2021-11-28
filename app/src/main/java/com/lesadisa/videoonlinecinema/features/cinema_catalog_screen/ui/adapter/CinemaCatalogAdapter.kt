@@ -10,7 +10,7 @@ import com.lesadisa.videoonlinecinema.domain.model.CinemaDomainModel
 
 class CinemaCatalogAdapter(
     private var movies: List<CinemaDomainModel>,
-    private val onItemClick: (movie: CinemaDomainModel) -> Unit, // нажатие (полученное binding.moviePoster.) передается в синемадоменмодель
+    private val onItemClick: (movie: CinemaDomainModel) -> Unit, // нажатие (полученное binding.moviePoster.) передается в CinemaDomainModel
 ) :
     RecyclerView.Adapter<CinemaCatalogAdapter.MoviesViewHolder>() {
 
@@ -46,12 +46,6 @@ class CinemaCatalogAdapter(
     }
 
     fun updateList(newMovies: List<CinemaDomainModel>) {
-        /* val diffCallback = DiffUtil(
-             oldMoviesList = movies,
-             newMoviesList = newMovies
-         )*/
-        /* val diffResult = DiffUtil.calculateDiff(diffCallback)
-         diffResult.dispatchUpdatesTo(this)*/
 
         movies = newMovies
         notifyDataSetChanged()

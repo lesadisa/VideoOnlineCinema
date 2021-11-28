@@ -21,13 +21,14 @@ class ServiceNotificationManager(
         notificationManager = PlayerNotificationManager.Builder(
             context,
             PlayerService.NOTIFICATION_ID,
-            PlayerService.NOTIFICATION_CHANNEL_ID
+            PlayerService.NOTIFICATION_CHANNEL_ID,
         ).apply {
             setChannelNameResourceId(R.string.notification_channel_name)
             setChannelDescriptionResourceId(R.string.notification_channel_description)
             setSmallIconResourceId(R.drawable.ic_play_movie)
             setMediaDescriptionAdapter(DescriptionsAdapter())
             setNotificationListener(notificationListener)
+
         }.build()
     }
 

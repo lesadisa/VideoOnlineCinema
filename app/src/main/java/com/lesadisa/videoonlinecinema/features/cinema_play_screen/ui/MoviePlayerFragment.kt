@@ -25,7 +25,6 @@ class MoviePlayerFragment : Fragment(R.layout.fragment_player) {
         fun newInstance(url: String) = MoviePlayerFragment().apply {
             // bundleOf Возвращает новый Bundle с заданными парами ключ / значение в качестве элементов.
             arguments = bundleOf(Pair(URL_KEY, url))
-            Log.d("URL2xxx", url)
         }
     }
 

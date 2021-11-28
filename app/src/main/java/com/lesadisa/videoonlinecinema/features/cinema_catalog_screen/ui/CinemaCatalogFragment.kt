@@ -15,6 +15,11 @@ import com.lesadisa.videoonlinecinema.features.cinema_catalog_screen.ui.adapter.
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CinemaCatalogFragment : Fragment() {
+    companion object {
+        fun newInstance() = CinemaCatalogFragment()
+    }
+
+
     private var _binding: FragmentCinemaCatalogBinding? = null
     private val binding get() = _binding!!
 
