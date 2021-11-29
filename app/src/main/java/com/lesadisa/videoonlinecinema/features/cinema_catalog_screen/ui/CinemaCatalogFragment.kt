@@ -48,7 +48,7 @@ class CinemaCatalogFragment : Fragment() {
         binding.rvMovies.apply {
             layoutManager = LinearLayoutManager(
                 requireContext(),
-                RecyclerView.HORIZONTAL,
+                RecyclerView.VERTICAL,
                 false
             )
             adapter = moviesCatalogAdapter
