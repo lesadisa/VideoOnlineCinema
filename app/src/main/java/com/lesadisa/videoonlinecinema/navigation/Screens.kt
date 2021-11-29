@@ -19,4 +19,6 @@ object Screens {
     fun moviePlayer(videoUrl: String) = FragmentScreen {
         MoviePlayerFragment.newInstance(videoUrl)
     }
+
+
 }

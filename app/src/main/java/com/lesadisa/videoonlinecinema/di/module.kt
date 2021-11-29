@@ -1,6 +1,9 @@
-package com.lesadisa.videoonlinecinema.staroe.di
+package com.lesadisa.videoonlinecinema.di
 
 
+import com.github.terrakok.cicerone.Cicerone
+import com.github.terrakok.cicerone.NavigatorHolder
+import com.github.terrakok.cicerone.Router
 import com.google.android.exoplayer2.ExoPlayer
 import com.lesadisa.videoonlinecinema.Const.HttpConst.BASE_MOVIES_URL
 import com.lesadisa.videoonlinecinema.base.httpCache10Mb
@@ -32,6 +35,19 @@ val appModule = module {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
+}
+val navModule = module {
+    single<Cicerone<Router>> {
+        Cicerone.create(Router())
+    }
+
+    single<NavigatorHolder> {
+        get<Cicerone<Router>>().getNavigatorHolder()
+    }
+
+    single<Router> {
+        get<Cicerone<Router>>().router
+    }
 
     single<CinemaApi> {
         get<Retrofit>().create(CinemaApi::class.java)
@@ -56,5 +72,6 @@ val appModule = module {
     factory<ExoPlayer> {
         ExoPlayer.Builder(androidApplication()).build()
     }
-
 }
+
+
