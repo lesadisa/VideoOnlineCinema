@@ -68,9 +68,5 @@ val navModule = module {
             get<Router>()
         )
     }
-
-
-
-
 }
 
