@@ -51,7 +51,6 @@ fun okHttp(cache: Cache): OkHttpClient {
 
 @SuppressLint("InlinedApi")
 fun hideSystemUI(window: Window, view: View) {
-    Log.d("URLxxx", "hideSystemUI")
     WindowCompat.setDecorFitsSystemWindows(window, false)
     WindowInsetsControllerCompat(window, view).let { controller ->
         controller.hide(WindowInsetsCompat.Type.systemBars())

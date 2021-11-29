@@ -1,14 +1,16 @@
 package com.lesadisa.videoonlinecinema.features.cinema_card.ui
 
+import com.github.terrakok.cicerone.Router
 import com.lesadisa.videoonlinecinema.base.BaseViewModel
 import com.lesadisa.videoonlinecinema.base.Event
 import com.lesadisa.videoonlinecinema.base.SingleLiveEvent
 import com.lesadisa.videoonlinecinema.domain.CinemaInteractor
-
+import com.lesadisa.videoonlinecinema.navigation.Screens
 
 
 class CinemaCardViewModel(
     private val cinemaInteractor: CinemaInteractor,
+    private val router: Router
 ) : BaseViewModel<ViewState>() {
     val singleLiveEvents = SingleLiveEvent<SingleEvent>()
 
@@ -42,8 +44,8 @@ class CinemaCardViewModel(
             //обрабатываем нажатие (получено из adaptera)
             is UiEvent.OnPlayClick -> {
                 // singleEvent  это эвент чтобы сделать навигацию для фрагмента
-                singleLiveEvents.value = SingleEvent.OpenPlayCard(event.cinema)
-
+                //  singleLiveEvents.value = SingleEvent.OpenPlayCard(event.cinema)
+                router.navigateTo(Screens.moviePlayer(event.cinema.video))
             }
 
             is DataEvent.OnFetching -> {

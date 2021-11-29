@@ -12,8 +12,8 @@ object Screens {
         CinemaCatalogFragment.newInstance()
     }
 
-    fun cinemaCard(movie: CinemaDomainModel) = FragmentScreen {
-        CinemaCardFragment.newInstance(movie)
+    fun cinemaCard(cinema: CinemaDomainModel) = FragmentScreen {
+        CinemaCardFragment.newInstance(cinema)
     }
 
     fun moviePlayer(videoUrl: String) = FragmentScreen {

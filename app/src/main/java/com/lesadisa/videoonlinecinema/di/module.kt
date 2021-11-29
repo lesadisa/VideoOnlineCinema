@@ -4,7 +4,6 @@ package com.lesadisa.videoonlinecinema.di
 import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
-import com.google.android.exoplayer2.ExoPlayer
 import com.lesadisa.videoonlinecinema.Const.HttpConst.BASE_MOVIES_URL
 import com.lesadisa.videoonlinecinema.base.httpCache10Mb
 import com.lesadisa.videoonlinecinema.base.okHttp
@@ -15,7 +14,6 @@ import com.lesadisa.videoonlinecinema.data.api.CinemaRepositoryImpl
 import com.lesadisa.videoonlinecinema.domain.CinemaInteractor
 import com.lesadisa.videoonlinecinema.features.cinema_catalog_screen.ui.CinemaCatalogViewModel
 import okhttp3.OkHttpClient
-import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -65,13 +63,14 @@ val navModule = module {
     }
 
     viewModel<CinemaCatalogViewModel> {
-        CinemaCatalogViewModel(get<CinemaInteractor>())
+        CinemaCatalogViewModel(
+            get<CinemaInteractor>(),
+            get<Router>()
+        )
     }
 
 
-    factory<ExoPlayer> {
-        ExoPlayer.Builder(androidApplication()).build()
-    }
+
+
 }
-
 

@@ -13,9 +13,9 @@ import com.lesadisa.videoonlinecinema.features.cinema_play_screen.ui.MoviePlayer
 
 
 class CinemaCardFragment : Fragment() {
-    //   private var _binding: FragmentCinemaCardBinding? = null
-    //  private val binding get() = _binding!!
-    private lateinit var binding: FragmentCinemaCardBinding
+    private var _binding: FragmentCinemaCardBinding? = null
+    private val binding get() = _binding!!
+    //  private lateinit var binding: FragmentCinemaCardBinding
 
     //  private val cardViewModel by viewModel<CinemaCardViewModel>()
     /* private val cardViewModel: CinemaCatalogViewModel by viewModels({requireParentFragment()})
@@ -39,7 +39,7 @@ class CinemaCardFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentCinemaCardBinding
+        _binding = FragmentCinemaCardBinding
             .inflate(inflater, container, false)
         return binding.root
     }
