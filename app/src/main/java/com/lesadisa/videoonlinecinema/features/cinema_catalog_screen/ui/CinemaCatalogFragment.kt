@@ -51,6 +51,7 @@ class CinemaCatalogFragment : Fragment() {
                 RecyclerView.VERTICAL,
                 false
             )
+
             adapter = moviesCatalogAdapter
         }
 

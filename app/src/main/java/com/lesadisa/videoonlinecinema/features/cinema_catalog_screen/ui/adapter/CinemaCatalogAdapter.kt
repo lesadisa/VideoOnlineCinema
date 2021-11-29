@@ -35,7 +35,8 @@ class CinemaCatalogAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: CinemaDomainModel) {
 
-
+            binding.tvOverview.text = movie.overview
+            binding.tvOriginalTitle.text = movie.originalTitle
             binding.moviePoster.apply {
                 loadImage(movie.posterPath)
                 setThrottledClickListener {
