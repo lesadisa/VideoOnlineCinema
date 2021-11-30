@@ -35,13 +35,16 @@ class CinemaCatalogAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: CinemaDomainModel) {
 
-            binding.tvOverview.text = movie.overview
+            binding.tvVoteAverage.text = movie.voteAverage.toString()
             binding.tvOriginalTitle.text = movie.originalTitle
             binding.moviePoster.apply {
                 loadImage(movie.posterPath)
-                setThrottledClickListener {
+                /*setThrottledClickListener {
                     onItemClick(movie)
-                }
+                }*/
+            }
+            binding.cardItemLayout.setThrottledClickListener {
+                onItemClick(movie)
             }
         }
     }

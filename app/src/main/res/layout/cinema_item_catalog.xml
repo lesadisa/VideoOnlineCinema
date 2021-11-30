@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="20dp"
     android:background="@color/colorPrimary"
+    android:id="@+id/cardItemLayout"
     android:orientation="horizontal">
 
     <ImageView
@@ -20,6 +22,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+
         <TextView
             android:id="@+id/tvOriginalTitle"
             android:layout_width="wrap_content"
@@ -27,13 +30,28 @@
             android:text="@string/text_originalTitle"
             android:textSize="25dp" />
 
-        <TextView
-            android:id="@+id/tvOverview"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/text_originalTitle"
-            android:textSize="25dp" />
+            android:layout_gravity="end"
+            android:orientation="horizontal">
 
+            <ImageView
+                android:id="@+id/ivVoteAverage"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:text="@string/text_originalTitle"
+                app:srcCompat="@drawable/ic_heart" />
+
+            <TextView
+                android:id="@+id/tvVoteAverage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_voteAverage"
+                android:textSize="25dp" />
+
+
+        </LinearLayout>
     </LinearLayout>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -6,4 +6,5 @@
     <string name="notification_channel_name">Demo</string>
     <string name="notification_channel_description">Demo video</string>
     <string name="text_originalTitle">Здесь должно быть originalTitle</string>
+    <string name="text_voteAverage">5.5</string>
 </resources>
