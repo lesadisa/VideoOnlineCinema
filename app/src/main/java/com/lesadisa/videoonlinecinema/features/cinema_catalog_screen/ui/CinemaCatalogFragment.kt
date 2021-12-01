@@ -23,7 +23,6 @@ class CinemaCatalogFragment : Fragment() {
     private var _binding: FragmentCinemaCatalogBinding? = null
     private val binding get() = _binding!!
 
-    // private lateinit var binding: FragmentCinemaCatalogBinding
     private val moviesViewModel by viewModel<CinemaCatalogViewModel>()
 
     //получаем сообщение от Adaptera о нажатии

@@ -15,11 +15,7 @@ import com.lesadisa.videoonlinecinema.features.cinema_play_screen.ui.MoviePlayer
 class CinemaCardFragment : Fragment() {
     private var _binding: FragmentCinemaCardBinding? = null
     private val binding get() = _binding!!
-    //  private lateinit var binding: FragmentCinemaCardBinding
 
-    //  private val cardViewModel by viewModel<CinemaCardViewModel>()
-    /* private val cardViewModel: CinemaCatalogViewModel by viewModels({requireParentFragment()})
-      */
     companion object {
         private const val MOVIE_KEY = "movie"
         fun newInstance(movie: CinemaDomainModel) = CinemaCardFragment().apply {

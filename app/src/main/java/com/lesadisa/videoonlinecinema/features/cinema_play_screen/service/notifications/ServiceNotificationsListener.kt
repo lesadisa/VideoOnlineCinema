@@ -15,10 +15,12 @@ import com.google.android.exoplayer2.ui.PlayerNotificationManager
 import com.lesadisa.videoonlinecinema.R
 import com.lesadisa.videoonlinecinema.features.cinema_play_screen.service.PlayerService
 
+
 @SuppressLint("RemoteViewLayout")
 class ServiceNotificationsListener(
     private val playerService: PlayerService
 ) : PlayerNotificationManager.NotificationListener {
+
 
     private val remoteView
             by lazy { RemoteViews(playerService.packageName, R.layout.fragment_player) }
@@ -61,7 +63,12 @@ class ServiceNotificationsListener(
             setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
             setCategory(NotificationCompat.CATEGORY_SERVICE)
             setPublicVersion(notification)
+
         }
+
+
+
+
 
         playerService.apply {
             if (Build.VERSION.SDK_INT > 26) {

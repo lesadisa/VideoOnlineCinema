@@ -46,8 +46,6 @@ class CinemaCatalogViewModel(
             }
             //обрабатываем нажатие (получено из adaptera)
             is UiEvent.OnPosterClick -> {
-                // singleEvent  это эвент чтобы сделать навигацию для фрагмента
-                // singleLiveEvent.value = SingleEvent.OpenMovieCard(event.cinema)
                 router.navigateTo(Screens.cinemaCard(event.cinema))
 
             }
