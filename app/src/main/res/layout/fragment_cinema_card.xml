@@ -67,7 +67,7 @@
                 android:id="@+id/cardMovieoverview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/movie_over"
+                android:background="@drawable/bgiten_two"
                 android:gravity="center"
                 android:text="@string/app_name"
                 android:textSize="20sp" />

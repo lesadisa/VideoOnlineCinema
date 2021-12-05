@@ -32,15 +32,6 @@ class MainActivity : AppCompatActivity() {
         navigatorHolder.removeNavigator()
     }
 
-    /*override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setFragment(CinemaCatalogFragment())
-    }*/
 
-/*    private fun setFragment(fragment: Fragment) {
-        // commit обязателен
-        supportFragmentManager.beginTransaction()
-            .replace(android.R.id.content, fragment).commit()
-    }*/
 
 }

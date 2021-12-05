@@ -1,12 +1,8 @@
 package com.lesadisa.videoonlinecinema.navigation
 
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentTransaction
 import com.github.terrakok.cicerone.Command
 import com.github.terrakok.cicerone.androidx.AppNavigator
-import com.github.terrakok.cicerone.androidx.FragmentScreen
-import com.lesadisa.videoonlinecinema.R
 
 class CinemaNavigator(activity: FragmentActivity, containerId: Int) :
     AppNavigator(activity, containerId) {
@@ -15,7 +11,7 @@ class CinemaNavigator(activity: FragmentActivity, containerId: Int) :
         activity.supportFragmentManager.executePendingTransactions()
     }
 
-    override fun setupFragmentTransaction(
+/*    override fun setupFragmentTransaction(
         screen: FragmentScreen,
         fragmentTransaction: FragmentTransaction,
         currentFragment: Fragment?,
@@ -25,7 +21,8 @@ class CinemaNavigator(activity: FragmentActivity, containerId: Int) :
             R.anim.slide_in,
             R.anim.fade_out,
             R.anim.fade_in,
-            R.anim.slide_out
+            R.anim.slide_out,
+
         )
-    }
+    }*/
 }
