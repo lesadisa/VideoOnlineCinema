@@ -4,7 +4,6 @@
     android:id="@+id/cardContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/background_light"
     android:fitsSystemWindows="true">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -40,13 +39,6 @@
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-            <ImageButton
-                android:id="@+id/ibtToPlay"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:src="@android:drawable/ic_media_play" />
-
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
@@ -64,21 +56,35 @@
             <TextView
                 android:id="@+id/cardMovieTitle"
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="@string/app_name" />
+                android:paddingBottom="20dp"
+                android:text="@string/app_name"
+                android:textAppearance="@style/Subtitle1"
+                android:textSize="25sp" />
 
             <TextView
                 android:id="@+id/cardMovieoverview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/movie_over"
                 android:gravity="center"
-                android:text="@string/app_name" />
+                android:text="@string/app_name"
+                android:textSize="20sp" />
 
 
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/ibtToPlay"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="30dp"
+        android:src="@android:drawable/ic_media_play"
+        app:fabCustomSize="60dp"
+        app:rippleColor="@color/design_default_color_secondary" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

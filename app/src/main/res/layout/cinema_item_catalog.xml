@@ -2,11 +2,11 @@
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardItemLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="20dp"
-    android:background="@color/colorPrimary"
-    android:id="@+id/cardItemLayout"
+    android:background="@drawable/bgitem"
     android:orientation="horizontal">
 
     <ImageView
@@ -19,7 +19,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
 
@@ -30,16 +30,19 @@
             android:text="@string/text_originalTitle"
             android:textSize="25dp" />
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+
+            >
+
 
             <ImageView
                 android:id="@+id/ivVoteAverage"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="10dp"
                 android:text="@string/text_originalTitle"
                 app:srcCompat="@drawable/ic_heart" />
 
@@ -47,11 +50,26 @@
                 android:id="@+id/tvVoteAverage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_toEndOf="@+id/ivVoteAverage"
                 android:text="@string/text_voteAverage"
                 android:textSize="25dp" />
 
+            <TextView
+                android:id="@+id/tvdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/text_voteDate"
+                android:textSize="25sp" />
 
-        </LinearLayout>
+
+        </RelativeLayout>
     </LinearLayout>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

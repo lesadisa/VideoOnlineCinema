@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import com.lesadisa.videoonlinecinema.R
 import com.lesadisa.videoonlinecinema.base.loadImage
 import com.lesadisa.videoonlinecinema.databinding.FragmentCinemaCardBinding
 import com.lesadisa.videoonlinecinema.domain.model.CinemaDomainModel
@@ -47,9 +49,10 @@ class CinemaCardFragment : Fragment() {
             cardPoster.loadImage(currMovie.posterPath)
             cardMovieoverview.text = currMovie.overview
             cardMovieTitle.text = currMovie.originalTitle
-
+            //         cardPoster.animate() = Animator.AnimatorListener.(, R.anim.logo_anim);
             // отрабатываем вывод URl
-
+            val animationZoomIn = AnimationUtils.loadAnimation(requireContext(), R.anim.logo_anim)
+            cardPoster.startAnimation(animationZoomIn)
             ibtToPlay.setOnClickListener {
 
                 parentFragmentManager.beginTransaction()

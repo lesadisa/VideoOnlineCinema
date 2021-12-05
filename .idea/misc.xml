@@ -4,6 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/ShaihlislamovLD/AndroidStudioProjects/VideoOnlineCinema/app/src/main/res/drawable/ic_placeholder.xml" value="0.2140625" />
+        <entry key="..\:/Users/nonii/AndroidStudioProjects/VideoOnlineCinema/app/src/main/res/drawable-v24/movieOver.xml" value="0.27282051282051284" />
+        <entry key="..\:/Users/nonii/AndroidStudioProjects/VideoOnlineCinema/app/src/main/res/drawable-v24/movie_over.xml" value="0.11574074074074074" />
+        <entry key="..\:/Users/nonii/AndroidStudioProjects/VideoOnlineCinema/app/src/main/res/drawable/bgitem.xml" value="0.27708333333333335" />
         <entry key="..\:/Users/nonii/AndroidStudioProjects/VideoOnlineCinema/app/src/main/res/drawable/divider_drawable.xml" value="0.21203703703703702" />
         <entry key="..\:/Users/nonii/AndroidStudioProjects/VideoOnlineCinema/app/src/main/res/drawable/ic_heart.xml" value="0.1685185185185185" />
         <entry key="..\:/Users/nonii/AndroidStudioProjects/VideoOnlineCinema/app/src/main/res/drawable/ic_image_not_found.xml" value="0.1" />
@@ -13,13 +16,14 @@
         <entry key="..\:/Users/nonii/AndroidStudioProjects/VideoOnlineCinema/app/src/main/res/layout/activity_main.xml" value="0.2609375" />
         <entry key="..\:/Users/nonii/AndroidStudioProjects/VideoOnlineCinema/app/src/main/res/layout/cinema_item_catalog.xml" value="0.25" />
         <entry key="..\:/Users/nonii/AndroidStudioProjects/VideoOnlineCinema/app/src/main/res/layout/custom_player_controls_view.xml" value="0.15" />
-        <entry key="..\:/Users/nonii/AndroidStudioProjects/VideoOnlineCinema/app/src/main/res/layout/fragment_cinema_card.xml" value="0.25" />
+        <entry key="..\:/Users/nonii/AndroidStudioProjects/VideoOnlineCinema/app/src/main/res/layout/fragment_cinema_card.xml" value="0.1" />
         <entry key="..\:/Users/nonii/AndroidStudioProjects/VideoOnlineCinema/app/src/main/res/layout/fragment_cinema_catalog.xml" value="0.2609375" />
         <entry key="..\:/Users/nonii/AndroidStudioProjects/VideoOnlineCinema/app/src/main/res/layout/fragment_movie_player.xml" value="0.13489583333333333" />
         <entry key="..\:/Users/nonii/AndroidStudioProjects/VideoOnlineCinema/app/src/main/res/layout/fragment_movies_card.xml" value="0.14" />
         <entry key="..\:/Users/nonii/AndroidStudioProjects/VideoOnlineCinema/app/src/main/res/layout/fragment_movies_list.xml" value="0.14492753623188406" />
         <entry key="..\:/Users/nonii/AndroidStudioProjects/VideoOnlineCinema/app/src/main/res/layout/fragment_player.xml" value="0.1" />
         <entry key="..\:/Users/nonii/AndroidStudioProjects/VideoOnlineCinema/app/src/main/res/layout/movie_item.xml" value="0.14628623188405798" />
+        <entry key="..\:/Users/nonii/AndroidStudioProjects/VideoOnlineCinema/app/src/main/res/layout/test_anim.xml" value="0.19202898550724637" />
         <entry key="..\:/Users/nonii/AndroidStudioProjects/VideoOnlineCinema/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
         <entry key="..\:/Users/nonii/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/auto_complete_list.xml" value="0.13489583333333333" />
       </map>

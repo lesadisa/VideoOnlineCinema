@@ -79,6 +79,7 @@ class ServiceNotificationsListener(
                         NotificationManager.IMPORTANCE_DEFAULT
                     )
                 )
+
                 notificationBuilder.setChannelId(PlayerService.NOTIFICATION_CHANNEL_ID)
                 val mNotification = notificationBuilder.build()
                 startForeground(PlayerService.NOTIFICATION_ID, mNotification)

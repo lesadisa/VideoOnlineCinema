@@ -50,7 +50,6 @@ class MoviePlayerFragment : Fragment(R.layout.fragment_player) {
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
             when (service) {
                 is PlayerService.PlayerServiceBinder -> {
-                    Log.d("URL1xxx", "onServiceConnected")
                     binding.playerView.player = service.getPlayer()
                 }
             }
@@ -59,7 +58,7 @@ class MoviePlayerFragment : Fragment(R.layout.fragment_player) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val intent = Intent(context, PlayerService::class.java)
+        val intent = Intent(requireContext(), PlayerService::class.java)
         intent.putExtra(PlayerService.VIDEO_FILE, url)
         //соединяемся с сервисом, используя метод bindService.
         // На вход передаем Intent, ServiceConnection и флаг BIND_AUTO_CREATE,
