@@ -53,11 +53,11 @@ class CinemaCardFragment : Fragment() {
             val animationZoomIn = AnimationUtils.loadAnimation(requireContext(), R.anim.logo_anim)
             val animationRotateIn = AnimationUtils.loadAnimation(requireContext(), R.anim.slide_in)
 
-            cardPoster.startAnimation(animationZoomIn)
+  /*          cardPoster.startAnimation(animationZoomIn)
             cardMovieoverview.startAnimation(animationZoomIn)
             cardMovieTitle.startAnimation(animationRotateIn)
 
-
+*/
 
 
             ibtToPlay.setOnClickListener {
