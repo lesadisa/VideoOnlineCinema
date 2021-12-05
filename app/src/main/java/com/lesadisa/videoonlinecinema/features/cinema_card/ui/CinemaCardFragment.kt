@@ -49,10 +49,17 @@ class CinemaCardFragment : Fragment() {
             cardPoster.loadImage(currMovie.posterPath)
             cardMovieoverview.text = currMovie.overview
             cardMovieTitle.text = currMovie.originalTitle
-            //         cardPoster.animate() = Animator.AnimatorListener.(, R.anim.logo_anim);
             // отрабатываем вывод URl
             val animationZoomIn = AnimationUtils.loadAnimation(requireContext(), R.anim.logo_anim)
+            val animationRotateIn = AnimationUtils.loadAnimation(requireContext(), R.anim.slide_in)
+
             cardPoster.startAnimation(animationZoomIn)
+            cardMovieoverview.startAnimation(animationZoomIn)
+            cardMovieTitle.startAnimation(animationRotateIn)
+
+
+
+
             ibtToPlay.setOnClickListener {
 
                 parentFragmentManager.beginTransaction()
