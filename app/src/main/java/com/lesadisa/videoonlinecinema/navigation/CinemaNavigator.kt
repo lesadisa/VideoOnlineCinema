@@ -10,19 +10,4 @@ class CinemaNavigator(activity: FragmentActivity, containerId: Int) :
         super.applyCommands(commands)
         activity.supportFragmentManager.executePendingTransactions()
     }
-
-/*    override fun setupFragmentTransaction(
-        screen: FragmentScreen,
-        fragmentTransaction: FragmentTransaction,
-        currentFragment: Fragment?,
-        nextFragment: Fragment
-    ) {
-        fragmentTransaction.setCustomAnimations(
-            R.anim.slide_in,
-            R.anim.fade_out,
-            R.anim.fade_in,
-            R.anim.slide_out,
-
-        )
-    }*/
 }

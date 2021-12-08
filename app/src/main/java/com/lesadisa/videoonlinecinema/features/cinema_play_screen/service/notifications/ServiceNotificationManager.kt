@@ -4,8 +4,12 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.os.Build
 import androidx.annotation.RequiresApi
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
 import com.lesadisa.videoonlinecinema.R
@@ -28,6 +32,7 @@ class ServiceNotificationManager(
             setSmallIconResourceId(R.drawable.ic_play_movie)
             setMediaDescriptionAdapter(DescriptionsAdapter())
             setNotificationListener(notificationListener)
+
 
         }.build()
     }
@@ -61,7 +66,26 @@ class ServiceNotificationManager(
             player: Player,
             callback: PlayerNotificationManager.BitmapCallback
         ): Bitmap? {
+            loadBitmap(callback)
             return null
         }
+    }
+
+    private fun loadBitmap(callback: PlayerNotificationManager.BitmapCallback?) {
+        Glide.with(context)
+            .asBitmap()
+            .load(R.drawable.ic_dratwo)
+            .into(object : CustomTarget<Bitmap>() {
+                override fun onResourceReady(
+                    resource: Bitmap,
+                    transition: Transition<in Bitmap>?
+                ) {
+                    callback?.onBitmap(resource)
+                }
+
+                override fun onLoadCleared(placeholder: Drawable?) {
+                    TODO("Not yet implemented")
+                }
+            })
     }
 }

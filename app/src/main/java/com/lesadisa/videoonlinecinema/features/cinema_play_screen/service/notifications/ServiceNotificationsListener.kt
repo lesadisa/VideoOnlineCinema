@@ -55,7 +55,11 @@ class ServiceNotificationsListener(
             Intent(playerService.applicationContext, PlayerService::class.java),
             PendingIntent.FLAG_MUTABLE
         )
-
+        /* val intent = Intent(playerService, MoviePlayerFragment::class.java).apply {
+             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+         }
+         val pendingIntent: PendingIntent = PendingIntent.getActivity(playerService, 0, intent, 0)
+ */
         notificationBuilder.apply {
             setContent(remoteView)
             addAction(R.drawable.ic_play_movie, "VideoPlayer", playerIntent)
@@ -63,6 +67,7 @@ class ServiceNotificationsListener(
             setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
             setCategory(NotificationCompat.CATEGORY_SERVICE)
             setPublicVersion(notification)
+            //  setContentIntent(pendingIntent)
 
         }
 

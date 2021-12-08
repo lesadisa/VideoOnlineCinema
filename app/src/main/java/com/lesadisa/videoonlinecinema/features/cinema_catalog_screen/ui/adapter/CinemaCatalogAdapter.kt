@@ -39,10 +39,7 @@ class CinemaCatalogAdapter(
             binding.tvOriginalTitle.text = movie.originalTitle
             binding.moviePoster.apply {
                 loadImage(movie.posterPath)
-                /*setThrottledClickListener {
-                    onItemClick(movie)
-                }*/
-            }
+                          }
             binding.cardItemLayout.setThrottledClickListener {
                 onItemClick(movie)
             }
