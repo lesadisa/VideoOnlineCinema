@@ -29,7 +29,7 @@ class ServiceNotificationManager(
         ).apply {
             setChannelNameResourceId(R.string.notification_channel_name)
             setChannelDescriptionResourceId(R.string.notification_channel_description)
-            setSmallIconResourceId(R.drawable.ic_play_movie)
+            setSmallIconResourceId(R.drawable.ic_dratwo)
             setMediaDescriptionAdapter(DescriptionsAdapter())
             setNotificationListener(notificationListener)
 

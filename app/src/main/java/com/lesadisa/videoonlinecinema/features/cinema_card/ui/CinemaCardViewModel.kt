@@ -41,7 +41,7 @@ class CinemaCardViewModel(
             }
             //обрабатываем нажатие (получено из adaptera)
             is UiEvent.OnPlayClick -> {
-                             router.navigateTo(Screens.moviePlayer(event.cinema.video))
+                             router.navigateTo(Screens.moviePlayer(event.cinema))
             }
 
             is DataEvent.OnFetching -> {

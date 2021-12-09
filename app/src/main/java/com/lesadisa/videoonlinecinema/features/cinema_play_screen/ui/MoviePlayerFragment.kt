@@ -6,7 +6,6 @@ import android.content.Intent
 import android.content.ServiceConnection
 import android.os.Bundle
 import android.os.IBinder
-import android.util.Log
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -16,26 +15,32 @@ import com.lesadisa.videoonlinecinema.R
 import com.lesadisa.videoonlinecinema.base.hideSystemUI
 import com.lesadisa.videoonlinecinema.base.showSystemUI
 import com.lesadisa.videoonlinecinema.databinding.FragmentPlayerBinding
+import com.lesadisa.videoonlinecinema.domain.model.CinemaDomainModel
 import com.lesadisa.videoonlinecinema.features.cinema_play_screen.service.PlayerService
 
 
 class MoviePlayerFragment : Fragment(R.layout.fragment_player) {
     companion object {
-        private const val URL_KEY = "url"
-        fun newInstance(url: String) = MoviePlayerFragment().apply {
+        private const val URL_KEY = "video"
+        fun newInstance(video: CinemaDomainModel) = MoviePlayerFragment().apply {
             // bundleOf Возвращает новый Bundle с заданными парами ключ / значение в качестве элементов.
-            arguments = bundleOf(Pair(URL_KEY, url))
+            arguments = bundleOf(Pair(URL_KEY, video))
         }
     }
 
     private val binding: FragmentPlayerBinding
             by viewBinding(FragmentPlayerBinding::bind)
 
-    private val url: String by lazy {
-        //requireArguments () --- метод, который возвращает пакет @NonNull или генерирует исключение IllegalStateException.
-        requireArguments().getString(URL_KEY)!!
+    /*   private val url: String by lazy {
+           //requireArguments () --- метод, который возвращает пакет @NonNull или генерирует исключение IllegalStateException.
+           requireArguments().getString(URL_KEY)!!
+
+       }*/
+    private val currMovie: CinemaDomainModel by lazy {
+        requireArguments().getParcelable(URL_KEY)!!
 
     }
+
 
     //Ключевое слово by lazy служит для отложенной инициализации через механизм делегатов. Делегат lazy принимает лямбда-выражение с кодом, который вы бы хотели выполнить для инициализации свойства.
     private val playerActivity: FragmentActivity by lazy {
@@ -59,7 +64,7 @@ class MoviePlayerFragment : Fragment(R.layout.fragment_player) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val intent = Intent(requireContext(), PlayerService::class.java)
-        intent.putExtra(PlayerService.VIDEO_FILE, url)
+        intent.putExtra(PlayerService.VIDEO_FILE, currMovie)
         //соединяемся с сервисом, используя метод bindService.
         // На вход передаем Intent, ServiceConnection и флаг BIND_AUTO_CREATE,
         // означающий, что, если сервис, к которому мы пытаемся подключиться, не работает,
@@ -74,7 +79,6 @@ class MoviePlayerFragment : Fragment(R.layout.fragment_player) {
 
     override fun onStart() {
         super.onStart()
-        Log.d("URLxxx", url)
         hideSystemUI(requireActivity().window, binding.playerView)
     }
 

@@ -66,7 +66,7 @@ class CinemaCardFragment : Fragment() {
                      .addToBackStack("movies").commit()*/
 
                 parentFragmentManager.beginTransaction()
-                    .replace(android.R.id.content, MoviePlayerFragment.newInstance(currMovie.video))
+                    .replace(android.R.id.content, MoviePlayerFragment.newInstance(currMovie))
                     .addToBackStack("movies").commit()
             }
         }

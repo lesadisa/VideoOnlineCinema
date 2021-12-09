@@ -6,6 +6,7 @@ import android.os.Binder
 import android.os.IBinder
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
+import com.lesadisa.videoonlinecinema.domain.model.CinemaDomainModel
 import com.lesadisa.videoonlinecinema.features.cinema_play_screen.service.notifications.ServiceEventsListener
 import com.lesadisa.videoonlinecinema.features.cinema_play_screen.service.notifications.ServiceNotificationManager
 import com.lesadisa.videoonlinecinema.features.cinema_play_screen.service.notifications.ServiceNotificationsListener
@@ -39,8 +40,11 @@ class PlayerService : Service() {
     }
 
     override fun onBind(intent: Intent?): IBinder {
-        val media = intent?.getStringExtra(VIDEO_FILE) ?: ""
-        preparePlayer(media)
+
+        val media: CinemaDomainModel? = intent?.getParcelableExtra<CinemaDomainModel>(VIDEO_FILE)
+        if (media != null) {
+            preparePlayer(media.video)
+        }
         return PlayerServiceBinder()
     }
 
@@ -68,6 +72,7 @@ class PlayerService : Service() {
             setMediaItem(MediaItem.fromUri(url))
             addListener(eventsListener)
             prepare()
+
 
         }
     }
