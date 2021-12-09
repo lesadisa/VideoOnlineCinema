@@ -61,6 +61,9 @@ class CinemaCardFragment : Fragment() {
 
 
             ibtToPlay.setOnClickListener {
+                /* parentFragmentManager.beginTransaction()
+                     .replace(android.R.id.content, MoviePlayerFragment.newInstance(currMovie))
+                     .addToBackStack("movies").commit()*/
 
                 parentFragmentManager.beginTransaction()
                     .replace(android.R.id.content, MoviePlayerFragment.newInstance(currMovie.video))

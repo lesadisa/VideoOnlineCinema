@@ -10,7 +10,7 @@ import com.lesadisa.videoonlinecinema.domain.model.CinemaDomainModel
 
 class CinemaCatalogAdapter(
     private var movies: List<CinemaDomainModel>,
-    private val onItemClick: (movie: CinemaDomainModel) -> Unit, // нажатие (полученное binding.moviePoster.) передается в CinemaDomainModel
+    private val onItemClick: (movie: CinemaDomainModel) -> Unit, //
 ) :
     RecyclerView.Adapter<CinemaCatalogAdapter.MoviesViewHolder>() {
 
@@ -37,12 +37,14 @@ class CinemaCatalogAdapter(
 
             binding.tvVoteAverage.text = movie.voteAverage.toString()
             binding.tvOriginalTitle.text = movie.originalTitle
+            binding.tvOverview.text = movie.overview
             binding.moviePoster.apply {
                 loadImage(movie.posterPath)
                           }
             binding.cardItemLayout.setThrottledClickListener {
                 onItemClick(movie)
             }
+
         }
     }
 

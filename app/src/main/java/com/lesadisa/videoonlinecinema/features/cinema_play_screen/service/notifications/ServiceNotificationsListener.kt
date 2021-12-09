@@ -67,6 +67,7 @@ class ServiceNotificationsListener(
             setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
             setCategory(NotificationCompat.CATEGORY_SERVICE)
             setPublicVersion(notification)
+            setSubText("sdfvsafgasg")
             //  setContentIntent(pendingIntent)
 
         }

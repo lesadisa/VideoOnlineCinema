@@ -44,7 +44,6 @@ class CinemaCatalogViewModel(
                     }
                 )
             }
-            //обрабатываем нажатие (получено из adaptera)
             is UiEvent.OnPosterClick -> {
                 router.navigateTo(Screens.cinemaCard(event.cinema))
 
