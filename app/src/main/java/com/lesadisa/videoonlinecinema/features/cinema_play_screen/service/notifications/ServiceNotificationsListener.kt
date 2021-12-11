@@ -14,6 +14,7 @@ import androidx.core.app.NotificationCompat
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
 import com.lesadisa.videoonlinecinema.R
 import com.lesadisa.videoonlinecinema.features.cinema_play_screen.service.PlayerService
+import com.lesadisa.videoonlinecinema.features.cinema_play_screen.ui.MoviePlayerFragment
 
 
 @SuppressLint("RemoteViewLayout")
@@ -55,11 +56,11 @@ class ServiceNotificationsListener(
             Intent(playerService.applicationContext, PlayerService::class.java),
             PendingIntent.FLAG_MUTABLE
         )
-        /* val intent = Intent(playerService, MoviePlayerFragment::class.java).apply {
-             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-         }
-         val pendingIntent: PendingIntent = PendingIntent.getActivity(playerService, 0, intent, 0)
- */
+        val intent = Intent(playerService, MoviePlayerFragment::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+        val pendingIntent: PendingIntent = PendingIntent.getActivity(playerService, 0, intent, 0)
+
         notificationBuilder.apply {
             setContent(remoteView)
             addAction(R.drawable.ic_play_movie, "VideoPlayer", playerIntent)
@@ -67,7 +68,6 @@ class ServiceNotificationsListener(
             setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
             setCategory(NotificationCompat.CATEGORY_SERVICE)
             setPublicVersion(notification)
-            setSubText("sdfvsafgasg")
             //  setContentIntent(pendingIntent)
 
         }
@@ -82,7 +82,7 @@ class ServiceNotificationsListener(
                     NotificationChannel(
                         PlayerService.NOTIFICATION_CHANNEL_ID,
                         PlayerService.NOTIFICATION_CHANNEL_NAME,
-                        NotificationManager.IMPORTANCE_DEFAULT
+                        NotificationManager.IMPORTANCE_DEFAULT,
                     )
                 )
 

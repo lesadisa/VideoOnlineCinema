@@ -13,9 +13,6 @@ import com.lesadisa.videoonlinecinema.features.cinema_play_screen.service.notifi
 import org.koin.android.ext.android.inject
 
 class PlayerService : Service() {
-    //Как правило объекты-компаньоны используются для объявления переменных и функций,
-    // к которым требуется обращаться без создания экземпляра класса.
-    // Либо для объявления констант.
     companion object {
         const val VIDEO_FILE = "video"
         const val NOTIFICATION_CHANNEL_NAME = "PlayerService"
@@ -32,7 +29,8 @@ class PlayerService : Service() {
     private val notificationManager: ServiceNotificationManager by lazy {
         ServiceNotificationManager(
             this,
-            ServiceNotificationsListener(this)
+            ServiceNotificationsListener(this),
+            mediaTitle = "Название"
         )
     }
     private val eventsListener: ServiceEventsListener by lazy {

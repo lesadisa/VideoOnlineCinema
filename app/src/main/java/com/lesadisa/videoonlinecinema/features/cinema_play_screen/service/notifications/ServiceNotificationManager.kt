@@ -17,7 +17,8 @@ import com.lesadisa.videoonlinecinema.features.cinema_play_screen.service.Player
 
 class ServiceNotificationManager(
     private val context: Context,
-    notificationListener: PlayerNotificationManager.NotificationListener
+    notificationListener: PlayerNotificationManager.NotificationListener,
+    private val mediaTitle: String
 ) {
     private val notificationManager: PlayerNotificationManager
 
@@ -34,8 +35,12 @@ class ServiceNotificationManager(
             setNotificationListener(notificationListener)
 
 
+
         }.build()
+
+
     }
+
 
     fun showNotification(player: Player) {
         notificationManager.setPlayer(player)
@@ -59,7 +64,8 @@ class ServiceNotificationManager(
         }
 
         override fun getCurrentContentText(player: Player): CharSequence {
-            return context.getString(R.string.notification_channel_description)
+            // return context.getString(R.string.notification_channel_description)
+            return mediaTitle
         }
 
         override fun getCurrentLargeIcon(
