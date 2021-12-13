@@ -1,5 +1,12 @@
 <resources>
-    <string name="app_name">VideoOnlineCinema</string>
+    <string name="app_name">Онлайн Кинотеатр</string>
     <string name="StartText">СтартовыйТекст</string>
     <string name="movieContentDescription">Афиша</string>
+    <string name="watch_movie_button">Watch movie</string>
+    <string name="notification_channel_name">Demo</string>
+    <string name="notification_channel_description">Demo video</string>
+    <string name="text_originalTitle">Здесь должно быть originalTitle</string>
+    <string name="text_voteAverage">5.5</string>
+    <string name="text_voteDate">2000</string>
+    <string name="CinemaOver">Описание Фильма</string>
 </resources>
